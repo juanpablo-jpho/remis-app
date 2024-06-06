@@ -1,0 +1,7 @@
+{
+  "name": "remis",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
