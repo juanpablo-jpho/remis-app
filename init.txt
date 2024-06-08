@@ -5,3 +5,15 @@ ionic start nombre-app
 cd nombre-app
 ionic serve
 
+-- crear proyecto en github
+
+npm install @capacitor/android
+npm install @capacitor/ios
+
+npm cap add android
+npm cap add ios
+
+npx cap sync 
+
+
+

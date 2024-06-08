@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Remis</string>
+    <string name="title_activity_main">Remis</string>
+    <string name="package_name">app.web.pideenremis</string>
+    <string name="custom_url_scheme">app.web.pideenremis</string>
+</resources>
