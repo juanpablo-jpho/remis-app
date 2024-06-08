@@ -1,0 +1,7 @@
+nvm install 22
+nvm use 22
+npm install -g @ionic/cli
+ionic start nombre-app
+cd nombre-app
+ionic serve
+
