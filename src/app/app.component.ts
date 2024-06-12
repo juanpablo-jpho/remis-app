@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { IoniconsService } from './services/ionicons.service';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,14 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-  constructor() {}
+
+  private ioniconsService: IoniconsService = inject(IoniconsService)
+
+  constructor() {
+
+      this.ioniconsService.loadAllIcons();
+
+  }
+
+
 }

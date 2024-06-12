@@ -1,0 +1,97 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title>Registrarse</ion-title>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" color="light">
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registrarse</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="11" size-md="8" size-xl="6">
+            <form [formGroup]="datosForm" (ngSubmit)="registrarse()">
+            
+  
+              <br>
+              <ion-input type="email" placeholder="Email" label="Email"
+              labelPlacement="floating" mode="md" fill="outline"
+              formControlName="email"
+              errorText="Ingresa un email válido"></ion-input>
+              <br>
+
+            <ion-input type="password" placeholder="Contraseña"
+              label="Contraseña"
+              labelPlacement="floating" mode="md" fill="outline"
+              formControlName="password"
+              errorText="Debe tener mínimo 6 caracteres">
+              <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+            </ion-input>
+            <br>
+            <ion-input type="text" placeholder="Juan" label="Tu nombre de usuario"
+            labelPlacement="floating" mode="md" fill="outline"
+            formControlName="name"
+            errorText="Este campo es requerido"></ion-input>
+            <br>
+            <ion-input type="number" placeholder="20" label="Edad"
+            labelPlacement="floating" mode="md" fill="outline"
+            formControlName="age"
+            errorText="Este campo es requerido"></ion-input>
+            <br>
+
+            <input #inputFile (change)="viewPreview(inputFile)" type="file" 
+            style='display: none;' accept="image/*">
+
+            <ion-list inset mode="ios">
+              <ion-item lines="none">
+                <ion-label>Selecciona una foto de perfil</ion-label>
+                <ion-buttons slot="end">
+                  <ion-button (click)="inputFile.click()">
+                    <ion-icon slot="icon-only" name="image"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-item>
+            
+            </ion-list>
+
+            <span style="text-align: end;"
+            *ngIf="datosForm.controls['photo'].hasError('required')">
+                  <i>Este campo es <strong>requerido</strong></i>  
+             </span>
+             <br>
+
+            @if (datosForm?.controls?.photo?.value) {
+              <div class="ion-text-center">
+                <img style="max-width: 150px" [src]="datosForm.controls.photo.value | filetourl">
+              </div>
+            }
+
+            <br>
+            <div class="ion-text-center">
+              <ion-button type="submit" shape="round">
+                Registrarse
+              </ion-button>
+            </div>
+            
+            </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+      <div class="ion-text-center">
+        <p> ¿Ya tienes un usuario?</p>
+        <ion-button [routerLink]="['/user/login']"  color="medium" shape="round">
+          Ingresar
+        </ion-button>
+      </div>
+
+</ion-content>
