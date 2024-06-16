@@ -47,7 +47,5 @@ bootstrapApplication(AppComponent, {
     provideAnalytics(() => getAnalytics() ),
     ScreenTrackingService,
     UserTrackingService
-
-
   ],
 });

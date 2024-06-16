@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">  Hola mundo</ion-title>
+      <ion-title size="large">  Hola mundo cambió</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -22,6 +22,9 @@
     <br>
     <ion-button (click)="save()" shape="round">
       guardar
+    </ion-button>
+    <ion-button [routerLink]="['/user/login']" >
+      login
     </ion-button>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>

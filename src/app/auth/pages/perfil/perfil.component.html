@@ -180,7 +180,7 @@
             }
 
             @if (opcModal == 'photo') {
-                @if (user.photoURL) {
+                <!-- @if (user.photoURL) { -->
 
                   <input #files (change)="viewPreview(files)" type="file" 
                         style='display: none;' accept="image/*">
@@ -211,7 +211,7 @@
                       </ion-button>
                     </div>
                   }
-                }
+                <!-- } -->
             }
 
             @if (opcModal == 'password') {

@@ -9,12 +9,15 @@ export class ReftourlPipe implements PipeTransform {
   storageService: StorageService = inject(StorageService);
 
   async transform(ref: string) {
-    if (ref.search('http') == 0) {
-      return ref;
+    if (ref) {
+      if (ref.search('http') == 0) {
+        return ref;
+      }
+      const url = await this.storageService.getDownloadURL(ref);
+      console.log('transform url -> ', url);
+      return url;
     }
-    const url = await this.storageService.getDownloadURL(ref);
-    console.log('transform url -> ', url);
-    return url;
+    return '';
   }
 
   

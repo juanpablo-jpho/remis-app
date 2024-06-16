@@ -1,7 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButton } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, 
+  IonContent, IonIcon, IonButton, IonRouterLink } from '@ionic/angular/standalone';
 import { FirestoreService } from '../firebase/firestore.service';
 import { InteractionService } from '../services/interaction.service';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -9,7 +11,10 @@ import { InteractionService } from '../services/interaction.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonButton, IonIcon, IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonButton, IonIcon, IonHeader, 
+    IonToolbar, IonTitle, IonContent,
+    RouterModule, IonRouterLink
+  ],
 })
 export class HomePage {
 

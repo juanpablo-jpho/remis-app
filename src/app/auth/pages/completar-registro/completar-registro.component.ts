@@ -56,9 +56,9 @@ export class CompletarRegistroComponent  implements OnInit {
 
   async completarRegistro() {
     this.cargando = true;
-    await this.interactionService.showLoading('Procensando...')
     console.log('datosFormCompleteRegistro -> ', this.datosFormCompleteRegistro);
     if (this.datosFormCompleteRegistro.valid) {
+      await this.interactionService.showLoading('Procensando...')
       const data = this.datosFormCompleteRegistro.value;
       console.log('valid -> ', data);
       try {
@@ -102,6 +102,7 @@ export class CompletarRegistroComponent  implements OnInit {
 
       }
     }
+    
     this.cargando = false;
   }
 
@@ -114,6 +115,10 @@ export class CompletarRegistroComponent  implements OnInit {
         console.log('this.datosFormCompleteRegistro.controls.photo -> ', this.datosFormCompleteRegistro.controls.photo.value);
 
     }
+  }
+
+  salir() {
+    this.authenticationService.logout();
   }
 
 }

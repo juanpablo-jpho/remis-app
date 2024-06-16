@@ -121,9 +121,10 @@ export class AuthenticationService {
         
         // const link = `http://localhost:8100/user/request-login?provider=${providerId}&intentId=${id}`;
         const link = `https://${environment.firebaseConfig.authDomain}/user/request-login?provider=${providerId}&intentId=${id}`;
-        // console.log('link -> ', link);
+        console.log('link -> ', link);
         await Browser.open({ url: link });        
       } catch (error) {
+        console.log('getTokenOfProvider -> ', error); 
         resolve(null);
       }
     })

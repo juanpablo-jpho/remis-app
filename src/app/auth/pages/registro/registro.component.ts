@@ -31,9 +31,6 @@ export class RegistroComponent  implements OnInit {
 
   cargando: boolean = false;
 
-  
-  
-  
 
   constructor(private fb: FormBuilder,
               private router: Router,

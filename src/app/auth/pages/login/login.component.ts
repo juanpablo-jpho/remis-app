@@ -50,13 +50,13 @@ export class LoginComponent  implements OnInit {
       textColor: 'white',
       icon: 'logo-apple'
     },
-    {
-      name: 'Iniciar sesión con Facebook',
-      id: 'facebook',
-      color: '#1871ed',
-      textColor: 'white',
-      icon: 'logo-facebook'
-    },
+    // {
+    //   name: 'Iniciar sesión con Facebook',
+    //   id: 'facebook',
+    //   color: '#1871ed',
+    //   textColor: 'white',
+    //   icon: 'logo-facebook'
+    // },
     {
       name: 'Iniciar sesión con correo y contraseña',
       id: 'password',
@@ -95,7 +95,7 @@ export class LoginComponent  implements OnInit {
     } else {
       await this.interactionService.showLoading('Procesando...')
       this.authenticationService.loginWithProvider(provider.id)
-    }
+    } 
 
   }
 
