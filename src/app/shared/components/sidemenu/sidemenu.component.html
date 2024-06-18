@@ -1,0 +1,53 @@
+
+  @if (user) {
+    <ion-item lines="full">
+      <ion-avatar slot="start">
+        <img [src]="user.photoURL | reftourl | async" />
+      </ion-avatar>
+      <ion-label>
+        {{user.displayName}}
+        <p>{{user.email}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item (click)="salir()">
+      <ion-icon slot="end" name="log-out" color="danger"></ion-icon>
+      <ion-label>Salir</ion-label>
+    </ion-item>
+  } @else {
+    <ion-menu-toggle autoHide="false">
+      <ion-item [routerLink]="['/user/login']">
+        <ion-icon slot="end" name="log-in" color="primary"></ion-icon>
+        <ion-label>Ingresar</ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+  }
+
+
+  @if (admin) {
+    <ion-menu-toggle autoHide="false">
+      <ion-item [routerLink]="['/user/admin']">
+        <ion-icon slot="end" name="people" color="primary"></ion-icon>
+        <ion-label>Admin</ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+  }
+
+  
+  @for (opc of menu; track $index) {
+    <ion-menu-toggle autoHide="false">
+      <ion-item [routerLink]="[opc.enlace]" detail lines="full"  
+      button routerDirection="forward"
+      >
+        <ion-label>{{opc.name}}</ion-label>
+        <ion-icon slot="start" [name]="opc.icon"></ion-icon>
+      </ion-item>
+    </ion-menu-toggle>
+  }
+
+
+  <ion-item>
+    <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between"
+      >Dark Mode</ion-toggle
+    >
+  </ion-item>
+

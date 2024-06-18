@@ -1,0 +1,3 @@
+ionic g c shared/components/sidemenu --spec=false
+
+ionic g m backoffice --routing

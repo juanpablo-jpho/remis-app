@@ -45,4 +45,10 @@ export namespace ModelsAuth {
 
     export type Rol = 'admin' | 'cliente' | 'motorizado';
 
+    export interface Roles {
+        admin?: boolean;
+        cliente?: boolean;
+        motorizado?: boolean;
+    }
+
 }
