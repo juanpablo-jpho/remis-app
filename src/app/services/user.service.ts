@@ -92,7 +92,7 @@ export class UserService {
     } 
     if (this.user) {
       const tokenResult = await this.user.getIdTokenResult(true);
-      // console.log('tokenResult -> ', tokenResult);
+      console.log('tokenResult -> ', tokenResult);
       const claims: any = tokenResult.claims;
       if (claims.roles) {
         this.roles = claims.roles;

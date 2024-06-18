@@ -45,7 +45,7 @@ export class UserDetailComponent  implements OnInit {
       uid: this.user.id
     }
     try {
-      const response = await this.functionsService.call<any, any>('appCall', request)
+      const response = await this.functionsService.call<any, any>('setRol', request)
       this.interactionService.dismissLoading();
       this.interactionService.showToast('Rol actualizado con éxito');
       console.log('response -> ', response);

@@ -87,17 +87,17 @@ export namespace guards {
 
           }
       }
+      console.log('valid -> ', valid);
       if (!valid) {
           router.navigate([path])
       }
-      console.log('valid -> ', valid);
       return valid;
     }
     return validador;
   
   }
 
-
+  
 
 
 }
