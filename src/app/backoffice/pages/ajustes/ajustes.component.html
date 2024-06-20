@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-title>Ajustes</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"  color="light">
+
+  <ion-header collapse="condense">
+    <ion-toolbar color="light">
+      <ion-title size="large">Ajustes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      @for (opc of menu; track $index) {
+        <ion-col size="6" size-md="3" size-xl="2">
+          <ion-card mode="ios" button [ngStyle]="{'background': opc.background}"
+              [routerLink]="[opc.enlace]" routerDirection="forward">
+            <ion-card-content>
+              <div class="ion-text-center">
+                <ion-icon size="large" [ngStyle]="{'color': opc.color}"  [name]="opc.icono"></ion-icon>
+              </div>
+              <div class="ion-text-center" [ngStyle]="{'color': opc.color}">
+                {{opc.nombre}}
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      }
+
+
+    </ion-row>
+  </ion-grid>
+
+  
+  <ion-list inset>
+      @for (opc of menu; track $index) {
+        <ion-item button detail
+        [routerLink]="[opc.enlace]" routerDirection="forward">
+          <ion-icon [name]="opc.icono" slot="start"></ion-icon>
+          <ion-label>  {{opc.nombre}}</ion-label>
+        </ion-item>
+      }
+    </ion-list>
+
+</ion-content>

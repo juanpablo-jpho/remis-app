@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-title>Categorias</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/backoffice/ajustes"></ion-back-button>
+      </ion-buttons>
+      @if (enableOptions) {
+        <ion-buttons slot="end">
+          <ion-button (click)="delete()">
+            <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"  color="light" (click)="enableOptions = false">
+
+  <ion-header collapse="condense">
+    <ion-toolbar color="light">
+      <ion-title size="large">Categorias</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="newCategorie()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" sizeMd="8" sizeLg="6">
+
+        <ion-list inset mode="ios">
+          @for (category of categories$ | async ; track $index) {
+            <ion-item detail button (click)="editCategorie(category)" (contextmenu)="showOptions($event, category)">
+              <ion-label class="ion-text-nowrap">
+                {{category.name}}
+                <p>{{category.description}}</p>
+              </ion-label>
+            </ion-item>
+          } @empty {
+            <div class="ion-text-center">
+              <ion-spinner name="bubbles"></ion-spinner>
+            </div>
+          }
+        </ion-list>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+</ion-content>

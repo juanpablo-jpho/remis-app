@@ -10,6 +10,11 @@ export const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule)
   },
   {
+    path: 'backoffice',
+    loadChildren: () => import('./backoffice/backoffice.module').then((m) => m.BackofficeModule),
+    // proteger rutas
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',

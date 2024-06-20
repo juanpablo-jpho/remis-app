@@ -1,3 +1,10 @@
 ionic g c shared/components/sidemenu --spec=false
 
-ionic g m backoffice --routing
+ionic g m backoffice --routing 
+ionic g c backoffice/pages/ajustes --spec=false
+ionic g c backoffice/pages/categorias --spec=false
+ionic g c backoffice/pages/productos --spec=false
+
+
+ionic g c backoffice/pages/categoria-detail --spec=false
+
