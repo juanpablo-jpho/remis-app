@@ -12,9 +12,10 @@ export namespace ModelsTienda {
     export interface Product {
         id?: string;
         name: string;
-        price: string;
+        price: number;
         description: string;
         images: string[];
+        enlacePermanente: string
         category: Category
     }
 

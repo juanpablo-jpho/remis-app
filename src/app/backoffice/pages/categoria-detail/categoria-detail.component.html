@@ -18,7 +18,7 @@
     <ion-grid fixed>
       <ion-row class="ion-justify-content-center">
         <ion-col size="11" sizeMd="6">
-          <form [formGroup]="categoria" (ngSubmit)="save()">
+          <form #formC [formGroup]="categoria" (ngSubmit)="save()">
       
             <!-- name -->
               <br>
@@ -48,7 +48,7 @@
     <ion-grid fixed class="ion-no-padding">
       <ion-row class="ion-justify-content-end">
         <ion-col size="12" sizeMd="6" sizeLg="4" class="ion-no-padding">
-            <ion-button [form]="categoria" (click)="save()" expand="block" shape="round">
+            <ion-button [form]="formC" type="submit" expand="block" shape="round">
               Guardar
             </ion-button>
         </ion-col>

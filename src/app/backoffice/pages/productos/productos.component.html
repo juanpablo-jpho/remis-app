@@ -4,6 +4,13 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/backoffice/ajustes"></ion-back-button>
     </ion-buttons>
+    @if (enableOptions) {
+      <ion-buttons slot="end">
+        <ion-button (click)="delete()">
+          <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    }
   </ion-toolbar>
 </ion-header>
 
@@ -14,5 +21,58 @@
       <ion-title size="large">Productos</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addProduct()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" sizeMd="8" sizeLg="6">
+
+
+
+        <ion-list inset mode="ios">
+          @for (product of products; track $index) {
+            <ion-item detail button (click)="editProduct(product.data())"
+            (contextmenu)="showOptions($event, product.data())">
+              <ion-label class="ion-text-nowrap">
+                {{product.data().name}}
+                <p>{{product.data().description}}</p>
+                <p>
+                  <ion-badge slot="start">{{product.data().price | currency}}</ion-badge>
+                </p>
+
+              </ion-label>
+            </ion-item>
+          } @empty {
+            <div class="ion-text-center">
+              <ion-spinner name="bubbles"></ion-spinner>
+            </div>
+          }
+        </ion-list>
+
+        @if (enableMore) {
+          
+          <!-- <div class="ion-text-center">
+            <ion-button (click)="loadProducts()" shape="round">
+                cargar más
+            </ion-button>
+          </div> -->
+
+          <ion-infinite-scroll #infiniteScroll threshold="25%" position="bottom" (ionInfinite)="loadMore($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        }
+        
+
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 
 </ion-content>

@@ -6,16 +6,17 @@ import { AjustesComponent } from './pages/ajustes/ajustes.component';
 import { CategoriasComponent } from './pages/categorias/categorias.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonCol, IonContent, IonFab, IonFabButton, IonFooter, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonMenuButton, IonRouterLink, IonRow, IonSpinner, IonTextarea, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonBackButton, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCol, IonContent, IonFab, IonFabButton, IonFooter, IonGrid, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonMenuButton, IonRouterLink, IonRow, IonSelect, IonSelectOption, IonSpinner, IonText, IonTextarea, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { CategoriaDetailComponent } from './pages/categoria-detail/categoria-detail.component';
-
+import { ProductoDetailComponent } from './pages/producto-detail/producto-detail.component';
 
 @NgModule({
   declarations: [
     AjustesComponent,
     CategoriasComponent,
     ProductosComponent,
-    CategoriaDetailComponent
+    CategoriaDetailComponent,
+    ProductoDetailComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +31,11 @@ import { CategoriaDetailComponent } from './pages/categoria-detail/categoria-det
     IonItem, IonLabel, IonList, IonListHeader,
     IonFab, IonFabButton,
     IonInput, IonTextarea, 
-    IonSpinner
+    IonSpinner,
+    IonSelect, IonSelectOption,
+    IonText,
+    IonInfiniteScroll, IonInfiniteScrollContent,
+    IonBadge
   ]
 })
 export class BackofficeModule { }

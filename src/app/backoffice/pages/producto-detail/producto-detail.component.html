@@ -1,0 +1,90 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-title>Producto</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/backoffice/ajustes/productos"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"  color="light">
+
+  <ion-header collapse="condense">
+    <ion-toolbar color="light">
+      <ion-title size="large">Producto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="11" sizeMd="6">
+        <form #formP [formGroup]="product" (ngSubmit)="save()">
+    
+          <!-- name -->
+          <br>
+          <ion-input type="text" label="Nombre" placeholder="" fill="outline" mode="md"
+          labelPlacement="floating" errorText="Este campo es requerido"
+          formControlName="name"></ion-input>
+          <br>
+    
+          <!-- descripcion -->
+          <ion-textarea type="text" label="Descripción" placeholder="" fill="outline" mode="md"
+          labelPlacement="floating"
+          formControlName="description" autoGrow></ion-textarea>
+          <br>
+
+          <!-- price -->
+          <ion-input type="number" label="Precio" placeholder="" fill="outline" mode="md"
+          labelPlacement="floating" errorText="Este campo es requerido"
+          formControlName="price"></ion-input>
+          <br>
+
+          <!-- enlace permanente -->
+          <br>
+          <ion-input type="text" label="Enlace permanente" placeholder="" fill="outline" mode="md"
+          labelPlacement="floating" errorText="Este campo es requerido"
+          formControlName="enlacePermanente"></ion-input>
+          <br>
+
+
+          <!-- category -->
+          <ion-select formControlName="category" label="Categoria" 
+          placeholder="Selecciona una categoria" fill="outline" mode="md"
+          cancelText="Cancelar" err>
+            @for (category of categories?.docs; track $index) {
+              <ion-select-option [value]="category.data().id">{{category.data().name}}</ion-select-option>
+            }
+          </ion-select>
+          @if (product.controls.category.hasError('required')) {
+            <div>
+              <ion-text color="danger">
+               Este campo es requerido
+              </ion-text>
+            </div>
+          }
+
+
+
+
+    
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid fixed class="ion-no-padding">
+      <ion-row class="ion-justify-content-end">
+        <ion-col size="12" sizeMd="6" sizeLg="4" class="ion-no-padding">
+            <ion-button [form]="formP" type="submit" expand="block" shape="round">
+              Guardar
+            </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+
