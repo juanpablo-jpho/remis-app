@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonBackButton, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCol, IonContent, IonFab, IonFabButton, IonFooter, IonGrid, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonMenuButton, IonRouterLink, IonRow, IonSelect, IonSelectOption, IonSpinner, IonText, IonTextarea, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { CategoriaDetailComponent } from './pages/categoria-detail/categoria-detail.component';
 import { ProductoDetailComponent } from './pages/producto-detail/producto-detail.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProductoDetailComponent } from './pages/producto-detail/producto-detail
     IonSelect, IonSelectOption,
     IonText,
     IonInfiniteScroll, IonInfiniteScrollContent,
-    IonBadge
+    IonBadge,
+    SharedModule
   ]
 })
 export class BackofficeModule { }

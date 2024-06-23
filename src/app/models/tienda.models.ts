@@ -1,7 +1,8 @@
 export namespace ModelsTienda {
 
     export const pathCategories = 'Categories';
-    export const pathProducts = 'Products'
+    export const pathProducts = 'Products';
+    export const folderProducts = 'Products'
 
     export interface Category {
         id?: string;

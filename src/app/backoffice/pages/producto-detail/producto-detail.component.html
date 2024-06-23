@@ -64,6 +64,42 @@
           }
 
 
+          <input #inputFile (change)="viewPreview(inputFile)" type="file" multiple 
+          style='display: none;' accept="image/*">
+
+          <div class="content-images">
+            @for (image of this.product.controls.images.value; track $index) {
+              <div style="position: relative;">
+                <img [src]="image" alt="">
+                <ion-icon (click)="deleteImage(image, $index)" class="icon-remove" name="close" color="ligth"></ion-icon>
+              </div>
+            }
+          </div>
+
+          <ion-card mode="ios">
+            <ion-item lines="none">
+              <ion-label>Añadir imágenes</ion-label>
+              <ion-buttons slot="end">
+                <ion-button (click)="inputFile.click()">
+                  <ion-icon slot="icon-only" name="images"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ion-card>
+
+
+
+
+          <div class="content-images">
+            @for (image of images; track $index) {
+              <div style="position: relative;">
+                <img [src]="image | filetourl " alt="">
+                <ion-icon (click)="remove($index)" class="icon-remove" name="close" color="ligth"></ion-icon>
+              </div>
+            }
+          </div>
+
+
 
 
     

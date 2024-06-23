@@ -1,0 +1,20 @@
+.content-images {
+    display: flex;
+    overflow: auto;
+}
+
+img {
+    margin: 10px;
+    max-width: 200px;
+    padding: 10px;
+    border: 1px dotted var(--ion-color-primary);
+}
+
+.icon-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 100%;
+    background: var(--ion-color-dark);
+    padding: 5px;
+}
