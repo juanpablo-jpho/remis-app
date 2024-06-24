@@ -37,7 +37,7 @@ export class UserService {
             if (res) {
               this.user = res;
               this.login = 'login';
-              console.log('authState -> ', this.user);
+              // console.log('authState -> ', this.user);
               this.getRol();
               if (this.validateHasProfile) {
                 this.getUserProfile(res.uid);
@@ -92,7 +92,7 @@ export class UserService {
     } 
     if (this.user) {
       const tokenResult = await this.user.getIdTokenResult(true);
-      console.log('tokenResult -> ', tokenResult);
+      // console.log('tokenResult -> ', tokenResult);
       const claims: any = tokenResult.claims;
       if (claims.roles) {
         this.roles = claims.roles;

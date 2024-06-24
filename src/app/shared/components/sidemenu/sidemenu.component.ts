@@ -170,7 +170,7 @@ interface Menu {
 const menu: Menu[] = [
   {  name: 'Usuarios', enlace: '/user/admin', icon: 'people', roles: ['admin']},
   {  name: 'Ajustes', enlace: '/backoffice/ajustes', icon: 'cog', roles: ['admin']},
-  {  name: 'Tienda', enlace: '/tienda', icon: 'storefront'},
+  {  name: 'Tienda', enlace: '/store', icon: 'storefront'},
   {  name: 'Mis pedidos', enlace: '/tienda/mis-pedidos', icon: 'cube', roles: ['cliente']}
 ];  
 

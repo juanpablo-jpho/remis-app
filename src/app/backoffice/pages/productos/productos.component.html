@@ -62,12 +62,12 @@
             </ion-button>
           </div> -->
 
-          <ion-infinite-scroll #infiniteScroll threshold="25%" position="bottom" (ionInfinite)="loadMore($event)">
-            <ion-infinite-scroll-content loadingSpinner="bubbles">
-            </ion-infinite-scroll-content>
-          </ion-infinite-scroll>
         }
         
+        <ion-infinite-scroll [disabled]="!enableMore" #infiniteScroll threshold="25%" position="bottom" (ionInfinite)="loadMore($event)">
+          <ion-infinite-scroll-content loadingSpinner="bubbles">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
 
         
       </ion-col>

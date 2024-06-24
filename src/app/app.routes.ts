@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { guards } from './shared/guards/guards';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,11 @@ export const routes: Routes = [
     path: 'backoffice',
     loadChildren: () => import('./backoffice/backoffice.module').then((m) => m.BackofficeModule),
     // proteger rutas
+    canActivate: [guards.isRolClaim(['admin'])]
+  },
+  {
+    path: 'store',
+    loadChildren: () => import('./store/store.module').then((m) => m.StoreModule),
   },
   {
     path: '',

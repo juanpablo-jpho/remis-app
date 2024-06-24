@@ -9,3 +9,7 @@ ionic g c backoffice/pages/productos --spec=false
 ionic g c backoffice/pages/categoria-detail --spec=false
 ionic g c backoffice/pages/producto-detail --spec=false
 
+ionic g m store --routing 
+ionic g c store/pages/home-store --spec=false
+ionic g c store/pages/producto --spec=false
+ionic g c store/pages/carrito-page --spec=false
