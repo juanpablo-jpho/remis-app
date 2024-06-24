@@ -38,6 +38,7 @@ export class CategoriaDetailComponent  implements OnInit {
         // crear regla en la base de datos
         if (this.categoriaExist) {
           await this.firestoreService.updateDocument(`${path}/${this.categoriaExist.id}`, data);
+          await this.saveCategoryInProducts();
         } else {
           await this.firestoreService.createDocument(path, data)
         }
@@ -75,6 +76,32 @@ export class CategoriaDetailComponent  implements OnInit {
       })
     }
     
+  }
+
+  async saveCategoryInProducts() {
+    const path = Models.Tienda.pathProducts;
+    const data = this.categoria.value;
+    const category: Models.Tienda.Category = {
+      name: data.name,
+      description: data.description,
+      id: this.categoriaExist.id
+    }
+    const updateDoc = {
+      category
+    }
+    const response = await this.firestoreService.getDocumentsQuery(path, 
+        [['category.id', '==', this.categoriaExist.id]]);
+    if (response.size) {
+      const tasks: Promise<void>[] = [];
+      response.docs.forEach( async doc => {
+        // console.log('doc -> ', doc.data());
+         const task = this.firestoreService.updateDocument(`${path}/${doc.id}`, updateDoc);
+         tasks.push(task);
+      });
+      await Promise.all(tasks);
+    }    
+
+
   }
 
 }

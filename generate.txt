@@ -8,3 +8,4 @@ ionic g c backoffice/pages/productos --spec=false
 
 ionic g c backoffice/pages/categoria-detail --spec=false
 ionic g c backoffice/pages/producto-detail --spec=false
+

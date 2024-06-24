@@ -60,6 +60,10 @@ export class CategoriasComponent  implements OnInit, OnDestroy {
   }
 
   editCategorie(category: Models.Tienda.Category) {
+    if (this.enableOptions) {
+      this.enableOptions = false;
+      return;
+    }
     console.log('editCategorie -> ', category.id);
     this.router.navigate(['/backoffice/ajustes/categoria-detalle'], { queryParams: {id: category.id}});
   }
@@ -86,6 +90,8 @@ export class CategoriasComponent  implements OnInit, OnDestroy {
     this.categorySelected = null;
     
   }
+
+
 
 
 

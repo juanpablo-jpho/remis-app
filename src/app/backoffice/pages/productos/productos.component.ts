@@ -79,6 +79,10 @@ export class ProductosComponent  implements OnInit {
   }
 
   editProduct(product: Models.Tienda.Product) {
+    if (this.enableOptions) {
+      this.enableOptions = false;
+      return;
+    }
     console.log('editProduct -> ', product.id);
     this.router.navigate(['/backoffice/ajustes/producto-detalle'], { queryParams: {id: product.id}});
   }

@@ -64,17 +64,19 @@
           }
 
 
-          <input #inputFile (change)="viewPreview(inputFile)" type="file" multiple 
-          style='display: none;' accept="image/*">
-
           <div class="content-images">
-            @for (image of this.product.controls.images.value; track $index) {
+            @for (image of product.controls.images.value; track $index) {
               <div style="position: relative;">
                 <img [src]="image" alt="">
                 <ion-icon (click)="deleteImage(image, $index)" class="icon-remove" name="close" color="ligth"></ion-icon>
               </div>
             }
           </div>
+
+
+          <input #inputFile (change)="viewPreview(inputFile)" type="file" multiple 
+          style='display: none;' accept="image/*">
+
 
           <ion-card mode="ios">
             <ion-item lines="none">

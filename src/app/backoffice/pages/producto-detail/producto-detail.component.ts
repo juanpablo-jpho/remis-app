@@ -66,7 +66,7 @@ export class ProductoDetailComponent  implements OnInit {
         this.interactionService.dismissLoading();
         this.interactionService.showToast('Guardado con éxito');
         // navegadar de vuelta a la página de categorias
-        this.router.navigate(['/backoffice/ajustes/productos'])
+        // this.router.navigate(['/backoffice/ajustes/productos'])
       } catch (error) {
         // capturar el error -> pero mostrar en la consola para saber que sucedió
         console.error(error)
@@ -144,14 +144,12 @@ export class ProductoDetailComponent  implements OnInit {
       try {
         await this.interactionService.showLoading('Eliminando...');
         await this.storageService.deleteFile(url);
-        const images = this.product.controls.images.value
+        // eliminar manualmente del formulario
+        const images = this.product.controls.images.value;
         images.splice(index, 1);
-        const updateDoc = {
-          images
-        }
+        const updateDoc = { images }
         const path = Models.Tienda.pathProducts;
-        await this.firestoreService.updateDocument(`${path}/${this.productExist.id}`, updateDoc);
-        this.product.controls.images.setValue(images);
+        await this.firestoreService.updateDocument(`${path}/${this.productExist.id}`, updateDoc)
         this.interactionService.dismissLoading();
       } catch (error) {
         console.error(error);
