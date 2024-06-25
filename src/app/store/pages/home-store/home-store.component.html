@@ -37,17 +37,7 @@
       @for (product of products; track $index) {
         <ion-col size="12" sizeSm="6" sizeMd="4">
 
-              <ion-item detail button>
-                <ion-label class="ion-text-nowrap">
-                  {{product.data().name}}
-                  <p>{{product.data().description}}</p>
-                  <p>
-                    <ion-badge slot="start">{{product.data().price | currency}}</ion-badge>
-                  </p>
-
-                </ion-label>
-              </ion-item>
-
+            <app-item-product [product]="product.data()"></app-item-product>
 
         </ion-col>
       } @empty {

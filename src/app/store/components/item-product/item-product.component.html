@@ -1,0 +1,22 @@
+@if (product) {
+  <ion-card (click)="gotoProduct()">
+      @if (product.images?.length) {
+        <img [alt]="product.name" [src]="product.images[0]" />
+      }
+      <ion-card-header>
+        <ion-card-title>{{product.name}}</ion-card-title>
+        <ion-card-subtitle>{{product.category.name}}</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <div class="description">
+          {{product.description}}
+        </div>
+        <br>
+        <div class="ion-text-end">
+          <ion-badge color="primary" mode="ios">{{product.price | currency}}</ion-badge>
+        </div>
+        
+      </ion-card-content>
+  </ion-card>
+}

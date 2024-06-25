@@ -15,7 +15,7 @@ export class UserService {
   private user: User;
   private userProfile: Models.Auth.UserProfile;
   private login: 'login' | 'not-login' ;
-  private roles: any;
+  private roles: Models.Auth.Roles;
 
   validateHasProfile: boolean = true;
 
@@ -86,7 +86,7 @@ export class UserService {
     })
   }
 
-  async getRol() {    
+  async getRol(): Promise<Models.Auth.Roles> {    
     if (this.roles) {
       return this.roles
     } 

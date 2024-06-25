@@ -16,6 +16,9 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { ScreenTrackingService, getAnalytics, provideAnalytics, UserTrackingService } from '@angular/fire/analytics';
 import { Capacitor } from '@capacitor/core';
 
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 if (environment.production) {
   enableProdMode();
@@ -46,6 +49,9 @@ bootstrapApplication(AppComponent, {
     provideStorage(() => getStorage()),
     provideAnalytics(() => getAnalytics() ),
     ScreenTrackingService,
-    UserTrackingService
+    UserTrackingService,
+    BrowserModule,
+    BrowserAnimationsModule, 
+    provideAnimationsAsync()
   ],
 });

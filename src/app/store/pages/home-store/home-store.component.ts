@@ -13,7 +13,6 @@ import { QueryDocumentSnapshot } from '@angular/fire/firestore';
 export class HomeStoreComponent  implements OnInit {
 
   private firestoreService: FirestoreService = inject(FirestoreService);
-  private interactionService: InteractionService = inject(InteractionService);
 
   categories$: Observable<Models.Tienda.Category[]>;
   categorySelected: string;

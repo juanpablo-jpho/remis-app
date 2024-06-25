@@ -13,3 +13,6 @@ ionic g m store --routing
 ionic g c store/pages/home-store --spec=false
 ionic g c store/pages/producto --spec=false
 ionic g c store/pages/carrito-page --spec=false
+
+ionic g c store/components/item-product --spec=false
+

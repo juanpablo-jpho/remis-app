@@ -1,3 +1,76 @@
-<p>
-  producto works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/store"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"  color="light">
+
+  <ion-header collapse="condense">
+    <ion-toolbar color="light">
+      <ion-title size="large">{{title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  @if (product) {
+
+    <br>
+    <ion-grid fixed>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12" sizeMd="5">
+          <!-- @if (product.images?.length) {
+            <img [alt]="product.name" [src]="product.images[0]" />
+          } -->
+
+          <p-galleria 
+              [value]="product.images" 
+              [containerStyle]="{ 'max-width': '640px' }" 
+              [numVisible]="2"
+              [showIndicators]="product.images.length > 1" 
+              [showThumbnails]="false" >
+                  <ng-template pTemplate="item" let-item>
+                      <!-- <img [src]="item" style="width: 100%;" /> -->
+                      <p-image [src]="item" alt="Image" width="100%" [preview]="true" />
+                  </ng-template>
+                  <ng-template pTemplate="thumbnail" let-item>
+                      <div class="grid grid-nogutter justify-content-center">
+                          <img [src]="item" />
+                      </div>
+                  </ng-template>
+          </p-galleria>
+
+        </ion-col>
+        <ion-col size="12" sizeMd="7">
+          <ion-card-header>
+            <ion-card-subtitle>{{product.category.name}}</ion-card-subtitle>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <div class="description">
+              {{product.description}}
+            </div>
+            <br>
+            <div class="ion-text-start">
+              <ion-badge color="primary" mode="ios">{{product.price | currency}}</ion-badge>
+            </div>
+            
+          </ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  }
+
+  @if (roles?.admin) {
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="editProduct()">
+        <ion-icon name="create"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  }
+
+</ion-content>
