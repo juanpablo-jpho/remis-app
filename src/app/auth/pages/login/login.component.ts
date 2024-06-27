@@ -79,7 +79,7 @@ export class LoginComponent  implements OnInit {
       this.enableLoginWithEmailAndPassword = true;
       return;
     }
-    if (Capacitor.isNativePlatform()) {
+    // if (Capacitor.isNativePlatform()) {
       await this.interactionService.showLoading('Procesando...')
       const token = await this.authenticationService.getTokenOfProvider(provider.id);
       // console.log(`token: ${token} para hacer el login con -> ${provider.id}`);
@@ -92,10 +92,10 @@ export class LoginComponent  implements OnInit {
           this.router.navigate(['user', 'perfil'], {replaceUrl: true})
         }, 200);
       }
-    } else {
-      await this.interactionService.showLoading('Procesando...')
-      this.authenticationService.loginWithProvider(provider.id)
-    } 
+    // } else {
+    //   await this.interactionService.showLoading('Procesando...')
+    //   this.authenticationService.loginWithProvider(provider.id)
+    // } 
 
   }
 

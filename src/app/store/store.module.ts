@@ -15,20 +15,29 @@ import { IonHeader, IonFooter, IonTitle, IonButtons,
   IonCard, IonCardContent, IonImg,
   IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonFab,IonFabButton,
-  IonList, IonListHeader} from '@ionic/angular/standalone';
+  IonList, IonListHeader,
+  IonChip,
+  IonDatetimeButton,
+  IonModal,
+  IonDatetime} from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { ItemProductComponent } from './components/item-product/item-product.component';
 import { GalleriaModule } from 'primeng/galleria';
 import { ImageModule } from 'primeng/image';
 import { ButtonCarritoComponent } from './components/button-carrito/button-carrito.component';
 import { ItemCarritoComponent } from './components/item-carrito/item-carrito.component';
+import { StepperModule } from 'primeng/stepper';
+import { DatosPedidoComponent } from './components/datos-pedido/datos-pedido.component';
+import { FechaPedidoComponent } from './components/fecha-pedido/fecha-pedido.component';
+
 
 @NgModule({
   declarations: [
     HomeStoreComponent,
     CarritoPageComponent,
     ProductoComponent,
-    ItemProductComponent
+    ItemProductComponent,
+    FechaPedidoComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +57,11 @@ import { ItemCarritoComponent } from './components/item-carrito/item-carrito.com
     GalleriaModule, ImageModule,
     ButtonCarritoComponent,
     IonList, IonListHeader,
-    ItemCarritoComponent
+    ItemCarritoComponent,
+    StepperModule, 
+    IonChip,
+    DatosPedidoComponent,
+    IonDatetimeButton, IonModal, IonDatetime
   ]
 })
 export class StoreModule { }

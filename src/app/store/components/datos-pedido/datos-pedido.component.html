@@ -1,0 +1,42 @@
+@if (user) {
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" sizeMd="8" sizeXl="4">
+          <ion-item lines="none" color="light">
+            <ion-avatar slot="start">
+              <img [src]="user.photoURL | reftourl | async" />
+            </ion-avatar>
+            <ion-label>
+              {{user.displayName}}
+              <p>{{user.email}}</p>
+            </ion-label>
+          </ion-item>
+        
+          <div>
+            <form #formC [formGroup]="datosForm">
+              <!-- phone -->
+                <br>
+                <ion-input type="text" label="Celular" placeholder="" fill="outline" mode="md"
+                labelPlacement="floating" errorText="Este campo es requerido"
+                formControlName="phone"></ion-input>
+                <br>
+            </form>
+          </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+} @else {
+  <ion-text>
+    Inicia sesión o regístrate para realizar un pedido
+  </ion-text>
+  <br>
+  <div class="ion-text-center">
+      <ion-button [routerLink]="['/user/login']">
+        ingresar
+      </ion-button>
+      <br>
+  </div>
+}

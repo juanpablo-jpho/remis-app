@@ -77,6 +77,15 @@ ion-list {
     background: none !important;
 }
 
+ion-button {
+    text-transform: unset !important;
+    letter-spacing: unset !important
+}
+
+.p-stepper-toggleable-content, .p-stepper-action {
+    background: none !important;
+}
+
 
 
 

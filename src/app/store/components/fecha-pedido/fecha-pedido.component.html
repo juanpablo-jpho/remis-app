@@ -1,0 +1,18 @@
+
+<ion-item lines="none" color="light">
+  <ion-icon slot="start" name="calendar" color="primary"></ion-icon>
+  <ion-label>Seleccionar la fecha de entrega</ion-label>
+</ion-item>
+<ion-datetime-button datetime="datetime"></ion-datetime-button>
+<br>
+
+
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime id="datetime" (ionChange)="changeDate()"
+    [min]="min" [max]="max"
+    [(ngModel)]="fechaEntega"
+    presentation="date"
+    [showDefaultButtons]="true" doneText="Aceptar" cancelText="Cancelar"></ion-datetime>
+  </ng-template>
+</ion-modal>

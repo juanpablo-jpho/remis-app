@@ -24,3 +24,6 @@ ionic g s services/local-storage
 ionic g c store/components/button-carrito --spec=false
 
 ionic g c store/components/item-carrito --spec=false
+
+ionic g c store/components/datos-pedido --spec=false
+ionic g c store/components/fecha-pedido --spec=false

@@ -15,26 +15,127 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-grid fixed>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="12" sizeMd="8">
+  <p-stepper orientation="vertical">
+    <p-stepperPanel header="Productos">
+        <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+          <ion-grid fixed>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" sizeMd="8">
+        
+        
+        
+                <!-- <ion-list> -->
+                  <!-- <ion-list-header>
+                    <ion-label>Productos:</ion-label>
+                  </ion-list-header> -->
+        
+        
+                  @for (item of carrito?.items; track $index) {
+                      <app-item-carrito [item]="item"></app-item-carrito>
+                  }
+        
+                <!-- </ion-list> -->
+        
+        
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+            <div class="flex pt-4 justify-content-end">
+              <ion-chip (click)="nextCallback.emit()" fill="solid" shape="round" color="primary">
+                <ion-label> siguiente</ion-label>
+                <ion-icon  name="arrow-forward"></ion-icon>
+              </ion-chip>
+            </div>
+        </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Datos">
+        <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+            <!-- <div class="flex flex-column h-12rem">
+                <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"> -->
+                    <!-- Content II -->
+                    <app-datos-pedido></app-datos-pedido>
+                <!-- </div>
+            </div> -->
+            <div class="flex pt-4 justify-content-between">
+                    <ion-chip (click)="prevCallback.emit()" fill="solid" shape="round" color="dark">
+                      <ion-icon  name="arrow-back"></ion-icon>
+                      <ion-label>retroceder</ion-label>
+                    </ion-chip>
+                    <ion-chip (click)="nextCallback.emit()" fill="solid" shape="round" color="primary">
+                      <ion-label> siguiente</ion-label>
+                      <ion-icon  name="arrow-forward"></ion-icon>
+                    </ion-chip>
+            </div>
+        </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Fecha de entrega">
+      <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+          <!-- <div class="flex flex-column h-12rem">
+              <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"> -->
+                  <!-- Content II -->
+                  <app-fecha-pedido></app-fecha-pedido>
+              <!-- </div>
+          </div> -->
+          <div class="flex pt-4 justify-content-between">
+                  <ion-chip (click)="prevCallback.emit()" fill="solid" shape="round" color="dark">
+                    <ion-icon  name="arrow-back"></ion-icon>
+                    <ion-label>retroceder</ion-label>
+                  </ion-chip>
+                  <ion-chip (click)="nextCallback.emit()" fill="solid" shape="round" color="primary">
+                    <ion-label> siguiente</ion-label>
+                    <ion-icon  name="arrow-forward"></ion-icon>
+                  </ion-chip>
+          </div>
+      </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Dirección de entrega">
+      <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+          <!-- <div class="flex flex-column h-12rem">
+              <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"> -->
+                  <!-- Content II -->
+                  <app-datos-pedido></app-datos-pedido>
+              <!-- </div>
+          </div> -->
+          <div class="flex pt-4 justify-content-between">
+                  <ion-chip (click)="prevCallback.emit()" fill="solid" shape="round" color="dark">
+                    <ion-icon  name="arrow-back"></ion-icon>
+                    <ion-label>retroceder</ion-label>
+                  </ion-chip>
+                  <ion-chip (click)="nextCallback.emit()" fill="solid" shape="round" color="primary">
+                    <ion-label> siguiente</ion-label>
+                    <ion-icon  name="arrow-forward"></ion-icon>
+                  </ion-chip>
+          </div>
+      </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Confirmación">
+        <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
+            <!-- <div class="flex flex-column h-12rem">
+                <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                    Content III
+                </div>
+            </div> -->
+            <div class="flex pt-4 justify-content-start">
+              <ion-chip (click)="prevCallback.emit()" fill="solid" shape="round" color="dark">
+                <ion-icon  name="arrow-back"></ion-icon>
+                <ion-label>retroceder</ion-label>
+              </ion-chip>
+            </div>
+            <br>
+            <ion-grid>
+              <ion-row class="ion-justify-content-end">
+                <ion-col size="12" sizeMd="6" sizeXl="4">
+                  <ion-button shape="round" expand="block" color="primary">
+                    pedir
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+        </ng-template>
+    </p-stepperPanel>
+</p-stepper>
 
-        <ion-list>
-          <ion-list-header>
-            <ion-label>Productos:</ion-label>
-          </ion-list-header>
 
-
-          @for (item of carrito?.items; track $index) {
-              <app-item-carrito [item]="item"></app-item-carrito>
-          }
-
-        </ion-list>
-
-
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 
 
 
