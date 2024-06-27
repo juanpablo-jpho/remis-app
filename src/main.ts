@@ -1,4 +1,4 @@
-import { enableProdMode } from '@angular/core';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
@@ -16,9 +16,8 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { ScreenTrackingService, getAnalytics, provideAnalytics, UserTrackingService } from '@angular/fire/analytics';
 import { Capacitor } from '@capacitor/core';
 
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 if (environment.production) {
   enableProdMode();
@@ -50,8 +49,8 @@ bootstrapApplication(AppComponent, {
     provideAnalytics(() => getAnalytics() ),
     ScreenTrackingService,
     UserTrackingService,
-    BrowserModule,
-    BrowserAnimationsModule, 
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    importProvidersFrom(IonicStorageModule.forRoot())
+    
   ],
 });

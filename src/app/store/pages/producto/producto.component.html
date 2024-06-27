@@ -4,6 +4,9 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/store"></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <app-button-carrito></app-button-carrito>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -26,21 +29,23 @@
           } -->
 
           <p-galleria 
-              [value]="product.images" 
-              [containerStyle]="{ 'max-width': '640px' }" 
-              [numVisible]="2"
-              [showIndicators]="product.images.length > 1" 
-              [showThumbnails]="false" >
-                  <ng-template pTemplate="item" let-item>
-                      <!-- <img [src]="item" style="width: 100%;" /> -->
-                      <p-image [src]="item" alt="Image" width="100%" [preview]="true" />
-                  </ng-template>
-                  <ng-template pTemplate="thumbnail" let-item>
-                      <div class="grid grid-nogutter justify-content-center">
-                          <img [src]="item" />
-                      </div>
-                  </ng-template>
-          </p-galleria>
+            [value]="product.images" 
+            [containerStyle]="{ 'max-width': '640px' }" 
+            [numVisible]="3"
+            [showThumbnails]="false"
+            [showIndicators]="product.images?.length > 1" >
+                <ng-template pTemplate="item" let-item>
+                    <!-- <img [src]="item" style="width: 100%;" /> -->
+                    <p-image   [src]="item" 
+                  [alt]="product.name" width="100%" 
+                  [preview]="true" />
+                </ng-template>
+                <ng-template pTemplate="thumbnail" let-item>
+                    <div class="grid grid-nogutter justify-content-center">
+                        <img [src]="item" />
+                    </div>
+                </ng-template>
+        </p-galleria>
 
         </ion-col>
         <ion-col size="12" sizeMd="7">
@@ -58,6 +63,30 @@
             </div>
             
           </ion-card-content>
+
+          <div class="carrito-buttons">
+            <ion-item lines="none" color="light" >
+             <ion-buttons slot="start">
+              <ion-button color="danger" fill="solid" (click)="remove()">
+                <ion-icon slot="icon-only" name="remove"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <ion-label class="ion-text-center">{{count()}}</ion-label>
+             <ion-buttons slot="end">
+              <ion-button color="success" fill="solid" (click)="add()" >
+                <ion-icon slot="icon-only" name="add" color="light"></ion-icon>
+              </ion-button>
+             </ion-buttons>
+            </ion-item>
+  
+            <ion-card mode="ios" button [routerLink]="['/store/carrito']">
+              <ion-item detail color="warning" lines="none">
+                <ion-icon slot="start" name="cart"></ion-icon>
+                <ion-label>ir al carrito</ion-label>
+              </ion-item>
+            </ion-card>
+          </div>
+
         </ion-col>
       </ion-row>
     </ion-grid>

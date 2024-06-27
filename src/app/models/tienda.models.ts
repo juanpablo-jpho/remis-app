@@ -20,4 +20,13 @@ export namespace ModelsTienda {
         category: Category
     }
 
+    export interface Carrito {
+        items: {
+            cant: number;
+            product: Product;
+        }[];
+        total: number;
+        cant: number
+    }
+
 }

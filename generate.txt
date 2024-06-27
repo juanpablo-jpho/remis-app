@@ -16,3 +16,9 @@ ionic g c store/pages/carrito-page --spec=false
 
 ionic g c store/components/item-product --spec=false
 
+ionic g s store/services/carrito
+
+npm install @ionic/storage-angular
+ionic g s services/local-storage
+
+ionic g c store/components/button-carrito --spec=false

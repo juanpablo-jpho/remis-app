@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { ItemProductComponent } from './components/item-product/item-product.component';
 import { GalleriaModule } from 'primeng/galleria';
 import { ImageModule } from 'primeng/image';
+import { ButtonCarritoComponent } from './components/button-carrito/button-carrito.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ImageModule } from 'primeng/image';
     IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,
     IonImg,
     IonFab, IonFabButton,
-    GalleriaModule, ImageModule
+    GalleriaModule, ImageModule,
+    ButtonCarritoComponent
   ]
 })
 export class StoreModule { }
