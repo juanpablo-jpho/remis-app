@@ -21,12 +21,14 @@ export namespace ModelsTienda {
     }
 
     export interface Carrito {
-        items: {
-            cant: number;
-            product: Product;
-        }[];
+        items: ItemCarrito[];
         total: number;
         cant: number
+    }
+
+    export interface ItemCarrito {
+        cant: number;
+        product: Product;
     }
 
 }

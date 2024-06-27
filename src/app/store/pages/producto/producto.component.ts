@@ -33,6 +33,7 @@ export class ProductoComponent  implements OnInit, OnDestroy {
       this.router.navigate([], {state: null, replaceUrl: true});
       this.product = data?.product;
       this.title = this.product.name;
+      this.getCarrito();
     } else {
       this.getParam();
     }
@@ -42,7 +43,6 @@ export class ProductoComponent  implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getCarrito();
   }
 
   ngOnDestroy(): void {
@@ -71,6 +71,7 @@ export class ProductoComponent  implements OnInit, OnDestroy {
       this.product = response.docs[0].data();
       console.log(' this.product -> ',  this.product);
       this.title = this.product.name;
+      this.getCarrito();
     }
   }
 
@@ -95,7 +96,7 @@ export class ProductoComponent  implements OnInit, OnDestroy {
   }
 
   setCant(carrito: Models.Tienda.Carrito) {
-    const item = carrito?.items.find( itemExist => itemExist.product.id == this.product.id );
+    const item = carrito?.items.find( itemExist => itemExist?.product?.id == this.product?.id );
     console.log('item -> ', item);
     if (item) {
       this.count.set(item.cant) // = item.cant;

@@ -10,19 +10,18 @@ import { IonHeader, IonFooter, IonTitle, IonButtons,
   IonGrid, IonRow, IonCol,
   IonRouterLink, IonSegment,
   IonSegmentButton,IonLabel,
-  IonSpinner,IonItem,
-  IonBadge,
+  IonSpinner,IonItem, IonBadge,
   IonInfiniteScroll, IonInfiniteScrollContent,
-  IonCard, IonCardContent,
-  IonImg,
+  IonCard, IonCardContent, IonImg,
   IonCardHeader, IonCardSubtitle, IonCardTitle,
-  IonFab,
-  IonFabButton} from '@ionic/angular/standalone';
+  IonFab,IonFabButton,
+  IonList, IonListHeader} from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { ItemProductComponent } from './components/item-product/item-product.component';
 import { GalleriaModule } from 'primeng/galleria';
 import { ImageModule } from 'primeng/image';
 import { ButtonCarritoComponent } from './components/button-carrito/button-carrito.component';
+import { ItemCarritoComponent } from './components/item-carrito/item-carrito.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +46,9 @@ import { ButtonCarritoComponent } from './components/button-carrito/button-carri
     IonImg,
     IonFab, IonFabButton,
     GalleriaModule, ImageModule,
-    ButtonCarritoComponent
+    ButtonCarritoComponent,
+    IonList, IonListHeader,
+    ItemCarritoComponent
   ]
 })
 export class StoreModule { }

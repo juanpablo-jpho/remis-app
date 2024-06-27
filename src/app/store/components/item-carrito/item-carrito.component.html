@@ -1,0 +1,32 @@
+@if (item) {
+  <ion-card>
+    <ion-item lines="full" detail [routerLink]="['/store/item/' + item.product.enlacePermanente]"  >
+      <ion-thumbnail slot="start">
+        <img [src]="item.product.images[0]" />
+      </ion-thumbnail>
+      <ion-label>
+        {{item.product.name}}
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button>
+          {{item.product.price | currency}}
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-buttons slot="start">
+        <ion-button color="danger" fill="clear"
+        (click)="remove()">
+          <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-label class="ion-text-center"> x {{item.cant}}</ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="success" fill="clear"
+        (click)="add()">
+          <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
+}

@@ -15,4 +15,38 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" sizeMd="8">
+
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Productos:</ion-label>
+          </ion-list-header>
+
+
+          @for (item of carrito?.items; track $index) {
+              <app-item-carrito [item]="item"></app-item-carrito>
+          }
+
+        </ion-list>
+
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar class="ion-text-end">
+    <ion-item lines="none">
+      <ion-badge slot="end">{{carrito?.total | currency}}</ion-badge>
+      <ion-label class="ion-text-end">
+        <strong>Total:</strong> 
+      </ion-label>
+    </ion-item>  
+  </ion-toolbar>
+</ion-footer>

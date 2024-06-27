@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CarritoService } from '../../services/carrito.service';
+import { Models } from 'src/app/models/models';
 
 @Component({
   selector: 'app-carrito-page',
@@ -7,8 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarritoPageComponent  implements OnInit {
 
-  constructor() { }
+  private carritoService: CarritoService = inject(CarritoService);
+  carrito: Models.Tienda.Carrito;
+
+
+  constructor() { 
+    this.loadCarrito();
+  }
 
   ngOnInit() {}
+
+  loadCarrito() {
+    this.carrito = this.carritoService.getCarrito();
+    this.carritoService.getCarritoChanges().subscribe( res => {
+      this.carrito = res;
+    });
+  }
 
 }
