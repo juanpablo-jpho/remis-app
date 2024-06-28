@@ -21,6 +21,10 @@ export const routes: Routes = [
     loadChildren: () => import('./store/store.module').then((m) => m.StoreModule),
   },
   {
+    path: 'maps', 
+    loadComponent: () => import('./store/components/map-direccion-pedido/map-direccion-pedido.component').then((m) => m.MapDireccionPedidoComponent),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',

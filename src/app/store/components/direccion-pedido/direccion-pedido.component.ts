@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IonIcon, IonItem, IonLabel, ModalController, IonButtons, IonButton } from "@ionic/angular/standalone";
+import { IonIcon, IonItem, IonLabel, IonButtons, IonButton, IonRouterLink } from "@ionic/angular/standalone";
 import { MapDireccionPedidoComponent } from '../map-direccion-pedido/map-direccion-pedido.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-direccion-pedido',
@@ -10,22 +11,16 @@ import { MapDireccionPedidoComponent } from '../map-direccion-pedido/map-direcci
   imports: [IonButton, IonButtons, 
     IonLabel, IonIcon, 
     IonItem,
-    MapDireccionPedidoComponent
+    MapDireccionPedidoComponent,
+    RouterModule,
+    IonRouterLink
   ]
 })
 export class DireccionPedidoComponent  implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  constructor() { }
 
   ngOnInit() {}
 
-  async presentMap() {
-    const modal = await this.modalController.create({
-    component: MapDireccionPedidoComponent,
-    // componentProps: { value: 123 }
-    });
-    await modal.present();
-  
-  }
 
 }

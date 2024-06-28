@@ -8,6 +8,10 @@ const routes: Routes = [
   {path: '', component: HomeStoreComponent},
   {path: 'item/:enlace', component: ProductoComponent},
   {path: 'carrito', component: CarritoPageComponent},
+  {
+    path: 'map-direccion-pedido', 
+    loadComponent: () => import('./components/map-direccion-pedido/map-direccion-pedido.component').then((m) => m.MapDireccionPedidoComponent),
+  },
 ];
 
 @NgModule({

@@ -45,5 +45,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Permitenos conocer tu ubicación para que puedas seleccionar de manera facil tu ubicación de envío</string>
+
 </dict>
 </plist>
