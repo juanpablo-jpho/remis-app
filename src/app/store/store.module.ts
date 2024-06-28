@@ -29,6 +29,7 @@ import { ItemCarritoComponent } from './components/item-carrito/item-carrito.com
 import { StepperModule } from 'primeng/stepper';
 import { DatosPedidoComponent } from './components/datos-pedido/datos-pedido.component';
 import { FechaPedidoComponent } from './components/fecha-pedido/fecha-pedido.component';
+import { DireccionPedidoComponent } from './components/direccion-pedido/direccion-pedido.component';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { FechaPedidoComponent } from './components/fecha-pedido/fecha-pedido.com
     CarritoPageComponent,
     ProductoComponent,
     ItemProductComponent,
-    FechaPedidoComponent
+    FechaPedidoComponent,
   ],
   imports: [
     CommonModule,
@@ -61,7 +62,8 @@ import { FechaPedidoComponent } from './components/fecha-pedido/fecha-pedido.com
     StepperModule, 
     IonChip,
     DatosPedidoComponent,
-    IonDatetimeButton, IonModal, IonDatetime
+    IonDatetimeButton, IonModal, IonDatetime,
+    DireccionPedidoComponent
   ]
 })
 export class StoreModule { }

@@ -35,6 +35,7 @@ export class LocalStorageService {
   }
 
   async deleteData(path: string) {
+    await this.init()
     return this.storage.remove(path);
   }
 

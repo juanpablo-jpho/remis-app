@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirestoreService } from 'src/app/firebase/firestore.service';
 import { Models } from 'src/app/models/models';
@@ -15,7 +15,7 @@ export class ProductoComponent  implements OnInit, OnDestroy {
 
   private firestoreService: FirestoreService = inject(FirestoreService);
   private userService: UserService = inject(UserService);
-  @Input() product: Models.Tienda.Product;
+  product: Models.Tienda.Product;
   title: string;
   roles: Models.Auth.Roles;
 

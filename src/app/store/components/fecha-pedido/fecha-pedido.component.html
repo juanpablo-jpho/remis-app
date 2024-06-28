@@ -10,9 +10,10 @@
 <ion-modal [keepContentsMounted]="true">
   <ng-template>
     <ion-datetime id="datetime" (ionChange)="changeDate()"
-    [min]="min" [max]="max"
     [(ngModel)]="fechaEntega"
+    [min]="min" [max]="max"
+    [showDefaultButtons]="true" 
     presentation="date"
-    [showDefaultButtons]="true" doneText="Aceptar" cancelText="Cancelar"></ion-datetime>
+    doneText="Aceptar" cancelText="Cancelar"></ion-datetime>
   </ng-template>
 </ion-modal>

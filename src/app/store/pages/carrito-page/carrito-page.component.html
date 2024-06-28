@@ -74,6 +74,7 @@
               <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"> -->
                   <!-- Content II -->
                   <app-fecha-pedido></app-fecha-pedido>
+                  <!-- <app-fecha-pedido></app-fecha-pedido> -->
               <!-- </div>
           </div> -->
           <div class="flex pt-4 justify-content-between">
@@ -90,12 +91,7 @@
     </p-stepperPanel>
     <p-stepperPanel header="Dirección de entrega">
       <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
-          <!-- <div class="flex flex-column h-12rem">
-              <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"> -->
-                  <!-- Content II -->
-                  <app-datos-pedido></app-datos-pedido>
-              <!-- </div>
-          </div> -->
+                  <app-direccion-pedido></app-direccion-pedido>
           <div class="flex pt-4 justify-content-between">
                   <ion-chip (click)="prevCallback.emit()" fill="solid" shape="round" color="dark">
                     <ion-icon  name="arrow-back"></ion-icon>

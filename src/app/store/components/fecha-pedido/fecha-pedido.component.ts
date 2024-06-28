@@ -18,9 +18,9 @@ export class FechaPedidoComponent  implements OnInit {
   ngOnInit() {}
 
   setMaxDate() {
-      const now = new Date();
-      now.setDate( now.getDate() + 10 );
-      this.max = now.toISOString();
+    const now = new Date();
+    now.setDate( now.getDate() + 10 );
+    this.max = now.toISOString();
   }
 
 
