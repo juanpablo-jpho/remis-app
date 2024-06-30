@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-title>Marcador</ion-title>
+      <ion-buttons slot="end">
+          <ion-button (click)="dismiss()">
+              <ion-icon slot="icon-only" name="close"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  @if (place) {
+      <ion-item lines="none">
+          <ion-label>
+              {{place.name}}
+              <p>{{place.description}}</p>
+              <p>Lat: {{place.marker.coordinate.lat}}</p>
+              <p>Lng: {{place.marker.coordinate.lng}}</p>
+          </ion-label>
+      </ion-item>
+  }
+</ion-content>

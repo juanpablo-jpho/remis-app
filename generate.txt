@@ -30,4 +30,6 @@ ionic g c store/components/fecha-pedido --spec=false
 
 ionic g c /store/components/direccion-pedido --spec=false
 ionic g c /store/components/map-direccion-pedido --spec=false
+ionic g c /store/components/place-detail --spec=false
+
 npm install @capacitor/google-maps@6.0.0-rc.0
