@@ -3,10 +3,6 @@ import { guards } from './shared/guards/guards';
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
     path: 'user',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule)
   },

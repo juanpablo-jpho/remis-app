@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-title>Mis pedidos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end" mode="ios">
+        <app-button-carrito></app-button-carrito>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"  color="light">
+
+  <ion-header collapse="condense">
+    <ion-toolbar color="light">
+      <ion-title size="large">Mis pedidos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      @for (pedido of pedidos; track $index) {
+        <ion-col size="12" sizeSm="6" sizeMd="4">
+
+          {{pedido.data().id}} - {{pedido.data().state}}
+            <!-- <app-item-product [product]="product.data()"></app-item-product> -->
+
+        </ion-col>
+      } @empty {
+        @if (!pedidos) {
+          <ion-col size="12">
+            <div class="ion-text-center">
+              <ion-spinner name="bubbles"></ion-spinner>
+            </div>
+          </ion-col>
+        } @else {
+          <div class="ion-text-center">
+            <p>
+              Aun no has realidado tu primer pedido
+            </p>
+            <ion-button [routerLink]="['/']"  shape="round">
+              <ion-label>Ir a la tienda</ion-label> 
+              <ion-icon slot="end" name="storefront"></ion-icon>
+            </ion-button>
+
+          </div>
+        }
+      }
+
+
+
+      <ion-infinite-scroll [disabled]="!enableMore" #infiniteScroll threshold="25%" position="bottom" (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -5,6 +5,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 import { LatLng } from '@capacitor/google-maps/dist/typings/definitions';
 import { FirestoreService } from '../../firebase/firestore.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class CarritoService {
   private infoPedido: Models.Tienda.InfoPedido;
   private infoPedido$ = new Subject<Models.Tienda.InfoPedido>;
 
-  constructor() { 
+  constructor(private router: Router) { 
     this.loadCarrito();
     this.initInfoPedido();
   }
@@ -169,7 +170,9 @@ export class CarritoService {
         await this.firestoreService.createDocument(path, pedido);
         this.interactionService.dismissLoading();
         this.interactionService.showToast('Pedido creado con éxito');
+        this.clearCarrito();
         // redirigir a la sección que deseemos
+        this.router.navigate(['/store/mis-pedidos'])
       } catch (error) {
         this.interactionService.dismissLoading();
         this.interactionService.presentAlert('Error', 'No se pudo realizar el pedido, intenta nuevamente');
@@ -178,6 +181,11 @@ export class CarritoService {
       this.interactionService.presentAlert('Importante', 'Por favor ingresa tus datos');
     }
 
+  }
+
+  clearCarrito() {
+    this.initCarrito();
+    this.saveCarrito();
   }
 
 
