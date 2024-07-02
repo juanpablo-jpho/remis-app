@@ -39,6 +39,7 @@ export class CarritoPageComponent  implements OnInit {
 
   pedir() {
     console.log('pedir infoPedido -> ', this.infoPedido);
+    this.carritoService.pedir();
   }
 
 }

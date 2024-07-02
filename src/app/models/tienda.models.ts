@@ -5,6 +5,7 @@ export namespace ModelsTienda {
     export const pathCategories = 'Categories';
     export const pathProducts = 'Products';
     export const folderProducts = 'Products'
+    export const pathPedidos = 'pedidos'
 
     export interface Category {
         id?: string;
@@ -50,6 +51,16 @@ export namespace ModelsTienda {
         coordinate: LatLng;
         referencia: string;
     }
+
+    export interface Pedido {
+        carrito: Carrito
+        info: InfoPedido;
+        id?: string;
+        uid: string;
+        state: StatePedido;
+    }
+
+    export type StatePedido = 'nuevo' | 'tomado' | 'asignado' | 'en camino' | 'entregado' | 'cancelado';
 
 
 

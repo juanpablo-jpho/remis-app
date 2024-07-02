@@ -3,13 +3,17 @@ import { Subject } from 'rxjs';
 import { Models } from 'src/app/models/models';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { LatLng } from '@capacitor/google-maps/dist/typings/definitions';
+import { FirestoreService } from '../../firebase/firestore.service';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarritoService {
 
-  private localStorageService: LocalStorageService = inject(LocalStorageService)
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private firestoreService: FirestoreService = inject(FirestoreService);
+  private interactionService: InteractionService = inject(InteractionService)
 
   private carrito: Models.Tienda.Carrito;
   private carrito$ = new Subject<Models.Tienda.Carrito>;
@@ -148,8 +152,32 @@ export class CarritoService {
   }
 
 
-  pedir() {
-    
+  async pedir() {
+    // validaciones adicionales
+    if (this.infoPedido?.datos?.id) {
+      const uid = this.infoPedido.datos.id;
+      const path = `${Models.Auth.PathUsers}/${uid}/${Models.Tienda.pathPedidos}`; 
+      // crear regla en firestore
+      const pedido: Models.Tienda.Pedido = {
+        carrito: this.carrito,
+        info: this.infoPedido,
+        uid,
+        state: 'nuevo'
+      }
+      try {
+        await this.interactionService.showLoading('Realizando pedido...');
+        await this.firestoreService.createDocument(path, pedido);
+        this.interactionService.dismissLoading();
+        this.interactionService.showToast('Pedido creado con éxito');
+        // redirigir a la sección que deseemos
+      } catch (error) {
+        this.interactionService.dismissLoading();
+        this.interactionService.presentAlert('Error', 'No se pudo realizar el pedido, intenta nuevamente');
+      }
+    } else {
+      this.interactionService.presentAlert('Importante', 'Por favor ingresa tus datos');
+    }
+
   }
 
 
