@@ -118,6 +118,10 @@ export class CarritoService {
     }
   }
 
+  getInfoPedido() {
+    return this.infoPedido;
+  }
+
   getInfoPedidoChanges() {
     return this.infoPedido$.asObservable();
   }
@@ -127,19 +131,25 @@ export class CarritoService {
     this.infoPedido$.next(this.infoPedido);
   }
 
-  setFechaEntregaPedido(fecha: string) {
+  setFechaEntregaPedido(fecha: Date) {
     this.infoPedido.fechaEntrega = fecha;
     this.infoPedido$.next(this.infoPedido);
   }
 
   setDireccionPedido(direccion: Models.Tienda.DireccionPedido) {
     this.infoPedido.direccionEntrega = direccion;
+    this.infoPedido$.next(this.infoPedido);
   }
 
   setCoordenadasPedido(coordinate: LatLng) {
     console.log('setCoordenadasPedido -> ', coordinate);
     this.infoPedido.direccionEntrega.coordinate = coordinate;
     this.infoPedido$.next(this.infoPedido);
+  }
+
+
+  pedir() {
+    
   }
 
 

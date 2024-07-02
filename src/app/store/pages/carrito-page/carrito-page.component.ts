@@ -12,10 +12,12 @@ export class CarritoPageComponent  implements OnInit {
 
   private carritoService: CarritoService = inject(CarritoService);
   carrito: Models.Tienda.Carrito;
+  infoPedido: Models.Tienda.InfoPedido;
 
 
   constructor() { 
     this.loadCarrito();
+    this.loadInfoPedido();
   }
 
   ngOnInit() {}
@@ -25,6 +27,18 @@ export class CarritoPageComponent  implements OnInit {
     this.carritoService.getCarritoChanges().subscribe( res => {
       this.carrito = res;
     });
+  }
+
+  loadInfoPedido() {
+    this.infoPedido = this.carritoService.getInfoPedido();
+    this.carritoService.getInfoPedidoChanges().subscribe( res => {
+      this.infoPedido = res;
+      console.log('infoPedido in carrito-page -> ', this.infoPedido);
+    });
+  }
+
+  pedir() {
+    console.log('pedir infoPedido -> ', this.infoPedido);
   }
 
 }

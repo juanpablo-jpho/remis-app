@@ -86,7 +86,7 @@ export class MapDireccionPedidoComponent  implements OnInit {
 
     // this.map.enableCurrentLocation(true);
     
-    if (Capacitor.isNativePlatform) {
+    if (Capacitor.isNativePlatform()) {
        this.map.enableCurrentLocation(true);
     }
     // this.setMarkerDemo();

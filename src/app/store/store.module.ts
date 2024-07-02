@@ -19,7 +19,8 @@ import { IonHeader, IonFooter, IonTitle, IonButtons,
   IonChip,
   IonDatetimeButton,
   IonModal,
-  IonDatetime} from '@ionic/angular/standalone';
+  IonDatetime,
+  IonText} from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { ItemProductComponent } from './components/item-product/item-product.component';
 import { GalleriaModule } from 'primeng/galleria';
@@ -62,7 +63,7 @@ import { DireccionPedidoComponent } from './components/direccion-pedido/direccio
     StepperModule, 
     IonChip,
     DatosPedidoComponent,
-    IonDatetimeButton, IonModal, IonDatetime,
+    IonDatetimeButton, IonModal, IonDatetime, IonText,
     DireccionPedidoComponent
   ]
 })

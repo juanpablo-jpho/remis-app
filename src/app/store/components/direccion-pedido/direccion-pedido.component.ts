@@ -47,9 +47,13 @@ export class DireccionPedidoComponent  implements OnInit {
         if (info?.direccionEntrega?.coordinate) {
           console.log('coordinate -> ', info?.direccionEntrega?.coordinate);
           this.direccionPedido.coordinate = info.direccionEntrega.coordinate;
-          this.carritoService.setDireccionPedido(this.direccionPedido);
         }
     });
+  }
+
+  setDireccionPedido() {
+    console.log('setDireccionPedido -> ', this.direccionPedido);
+    this.carritoService.setDireccionPedido(this.direccionPedido);
   }
 
 

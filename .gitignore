@@ -10,6 +10,7 @@ firebase-debug.*.log*
 # Firebase cache
 .firebase/
 .angular/
+www/
 
 # Firebase config
 

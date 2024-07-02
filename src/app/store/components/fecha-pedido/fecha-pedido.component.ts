@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CarritoService } from '../../services/carrito.service';
 
 @Component({
   selector: 'app-fecha-pedido',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fecha-pedido.component.scss'],
 })
 export class FechaPedidoComponent  implements OnInit {
+
+  private carritoService: CarritoService = inject(CarritoService);
 
   fechaEntega = (new Date()).toISOString();
   min = (new Date()).toISOString();
@@ -15,7 +18,9 @@ export class FechaPedidoComponent  implements OnInit {
     this.setMaxDate();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.carritoService.setFechaEntregaPedido(new Date(this.fechaEntega));
+  }
 
   setMaxDate() {
     const now = new Date();
@@ -26,6 +31,7 @@ export class FechaPedidoComponent  implements OnInit {
 
   changeDate() {
     console.log('changeDate() -> ', this.fechaEntega);
+    this.carritoService.setFechaEntregaPedido(new Date(this.fechaEntega));
   }
 
 }

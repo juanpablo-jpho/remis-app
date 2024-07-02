@@ -15,7 +15,7 @@
           </ion-buttons>
         </ion-item>
         <br>
-        <ion-textarea label="Refencia para ubicarnos más facilmente" labelPlacement="floating"
+        <ion-textarea (ionChange)="setDireccionPedido()" label="Refencia para ubicarnos más facilmente" labelPlacement="floating"
         [(ngModel)]="direccionPedido.referencia" fill="outline" mode="md"
         placeholder="Calle A y Av Z, edificio 3 pisos...">
         </ion-textarea>

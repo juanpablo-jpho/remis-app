@@ -35,7 +35,7 @@ export namespace ModelsTienda {
 
     export interface InfoPedido {
         datos: DatosUserPedido
-        fechaEntrega: string;
+        fechaEntrega: Date;
         direccionEntrega: DireccionPedido
     }
 
