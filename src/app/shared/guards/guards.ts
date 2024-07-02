@@ -6,13 +6,13 @@ import { UserService } from "src/app/services/user.service";
 export namespace guards {
 
   export const isLogin = (path: string = '/home') : CanActivateFn => {
-    console.log('isLogin guard -> ', path);
+    // console.log('isLogin guard -> ', path);
     const validador = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {      
       const userService: UserService = inject(UserService);
       const router: Router = inject(Router);
 
       const login = await userService.isLogin();
-      console.log('isLogin -> ', login);
+      // console.log('isLogin -> ', login);
       if (!login) {
           router.navigate([path]);
           return false;
@@ -23,7 +23,7 @@ export namespace guards {
   }
 
   export const notLogin = (path: string = '/home') : CanActivateFn => {
-    console.log('notLogin guard');
+    // console.log('notLogin guard');
     const validador = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {      
       const userService: UserService = inject(UserService);
       const router: Router = inject(Router);
@@ -67,7 +67,7 @@ export namespace guards {
   }
 
   export const isRolClaim = (roles: Models.Auth.Rol[], path: string = '/home') : CanActivateFn => {
-    console.log('isRolClaim -> ', roles);
+    // console.log('isRolClaim -> ', roles);
     const validador = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
       let valid = false;
       const userService: UserService = inject(UserService);

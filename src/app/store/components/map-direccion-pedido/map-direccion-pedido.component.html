@@ -8,10 +8,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true"
-[ngStyle]="{'--background': transparency ? 'transparent' : 'var(--ion-color-light)' }">
+[ngStyle]="{'--background': transparency ? 'transparent' : 'var(--ion-color-light)'}">
 
 
     <capacitor-google-map id="map"></capacitor-google-map>
+
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="getCurrentPosition()">
+            <ion-icon name="locate"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+
 
 
 </ion-content>

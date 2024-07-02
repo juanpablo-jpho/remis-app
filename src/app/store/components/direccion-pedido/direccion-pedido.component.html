@@ -1,14 +1,40 @@
 
-<ion-item button lines="none" color="light">
-  <ion-icon name="location" slot="start" color="danger"></ion-icon>
-  <ion-label>Establece la ubicación de tu pedido</ion-label>
-</ion-item>
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size="11" sizeMd="8" sizeLg="6">
+      @if (direccionPedido.coordinate) {
+
+        <ion-item detail button lines="none" color="light">
+          <ion-icon slot="start" name="location" color="danger"></ion-icon>
+          <ion-label>Ubicación establecida correctamente</ion-label>
+          <ion-buttons slot="end">
+            <ion-button color="primary" [routerLink]="['/store/map-direccion-pedido']" 
+            [queryParams]="direccionPedido.coordinate">
+             editar
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+        <br>
+        <ion-textarea label="Refencia para ubicarnos más facilmente" labelPlacement="floating"
+        [(ngModel)]="direccionPedido.referencia" fill="outline" mode="md"
+        placeholder="Calle A y Av Z, edificio 3 pisos...">
+        </ion-textarea>
+      
+      } @else {
+        <ion-item button lines="none" color="light">
+          <ion-icon name="location" slot="start" color="danger"></ion-icon>
+          <ion-label>Establece la ubicación de tu pedido</ion-label>
+        </ion-item>
+        <ion-button [routerLink]="['/store/map-direccion-pedido']" shape="round">
+          <strong>establacer</strong>  
+          <ion-icon slot="end" name="locate"></ion-icon>
+        </ion-button>
+      }
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
 
-<ion-button [routerLink]="['/store/map-direccion-pedido']" shape="round">
-  <strong>establacer</strong>  
-  <ion-icon slot="end" name="locate"></ion-icon>
-</ion-button>
 <br>
 <br>
 

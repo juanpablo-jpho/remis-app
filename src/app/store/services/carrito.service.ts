@@ -2,23 +2,27 @@ import { Injectable, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Models } from 'src/app/models/models';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { LatLng } from '@capacitor/google-maps/dist/typings/definitions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarritoService {
 
-  localStorageService: LocalStorageService = inject(LocalStorageService)
+  private localStorageService: LocalStorageService = inject(LocalStorageService)
 
-  carrito: Models.Tienda.Carrito;
-  carrito$ = new Subject<Models.Tienda.Carrito>;
+  private carrito: Models.Tienda.Carrito;
+  private carrito$ = new Subject<Models.Tienda.Carrito>;
+
+  private infoPedido: Models.Tienda.InfoPedido;
+  private infoPedido$ = new Subject<Models.Tienda.InfoPedido>;
 
   constructor() { 
-    this.initCarrito();
     this.loadCarrito();
+    this.initInfoPedido();
   }
 
-  initCarrito() {
+  private initCarrito() {
     this.carrito = {
       items: [],
       total: 0,
@@ -75,7 +79,7 @@ export class CarritoService {
     return this.carrito;
   }
 
-  getTotal() {
+  private getTotal() {
     let total = 0;
     let cantidad = 0;
     this.carrito.items.forEach( item => {
@@ -86,7 +90,7 @@ export class CarritoService {
     this.carrito.cant = cantidad;
   }
 
-  async loadCarrito() {
+  private async loadCarrito() {
     const path = 'Carrito';
     const data = await this.localStorageService.getData(path);
     if (data) {
@@ -98,10 +102,49 @@ export class CarritoService {
     this.carrito$.next(this.carrito);
   }
 
-  saveCarrito() {
+  private saveCarrito() {
     const path = 'Carrito';
     this.localStorageService.setData(path, this.carrito);
   }
+
+  private initInfoPedido() {
+    this.infoPedido = {
+      datos: null,
+      fechaEntrega: null,
+      direccionEntrega: {
+        coordinate: null,
+        referencia: null
+      }
+    }
+  }
+
+  getInfoPedidoChanges() {
+    return this.infoPedido$.asObservable();
+  }
+
+  setDatosPedido(datos: Models.Tienda.DatosUserPedido) {
+    this.infoPedido.datos = datos;
+    this.infoPedido$.next(this.infoPedido);
+  }
+
+  setFechaEntregaPedido(fecha: string) {
+    this.infoPedido.fechaEntrega = fecha;
+    this.infoPedido$.next(this.infoPedido);
+  }
+
+  setDireccionPedido(direccion: Models.Tienda.DireccionPedido) {
+    this.infoPedido.direccionEntrega = direccion;
+  }
+
+  setCoordenadasPedido(coordinate: LatLng) {
+    console.log('setCoordenadasPedido -> ', coordinate);
+    this.infoPedido.direccionEntrega.coordinate = coordinate;
+    this.infoPedido$.next(this.infoPedido);
+  }
+
+
+
+
 
 
 

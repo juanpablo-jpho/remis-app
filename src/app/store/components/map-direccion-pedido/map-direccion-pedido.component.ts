@@ -1,29 +1,35 @@
-import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, ViewChild, signal } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, inject } from '@angular/core';
 import { GoogleMap, MapType, Marker, LatLngBounds } from '@capacitor/google-maps';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, 
   IonToolbar, MenuController, IonModal, IonItem, 
   IonLabel, IonIcon, IonButton, 
-  ModalController} from '@ionic/angular/standalone';
+  ModalController,
+  IonFab,
+  IonFabButton} from '@ionic/angular/standalone';
 import { environment } from 'src/environments/environment';
-import { ItemCarritoComponent } from '../item-carrito/item-carrito.component';
 import { PlaceDetailComponent } from '../place-detail/place-detail.component';
+import { CommonModule } from '@angular/common';
+
+import { Geolocation } from '@capacitor/geolocation';
+import { Capacitor } from '@capacitor/core';
+import { InteractionService } from '../../../services/interaction.service';
+import { CarritoService } from '../../services/carrito.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 const apiKey = environment.firebaseConfig.apiKey;
-
-
-
 
 @Component({
   selector: 'app-map-direccion-pedido',
   templateUrl: './map-direccion-pedido.component.html',
   styleUrls: ['./map-direccion-pedido.component.scss'],
   standalone: true,
-  imports: [IonModal, 
-    IonHeader, IonToolbar, IonBackButton, IonTitle,
+  imports: [IonHeader, IonToolbar, IonBackButton, IonTitle,
     IonContent, IonButtons,
-    CommonModule, IonItem, IonLabel,
-    IonIcon, IonButton
+    IonItem, IonLabel,
+    IonIcon, IonButton,
+    CommonModule,
+    IonFab, IonFabButton
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -33,10 +39,13 @@ export class MapDireccionPedidoComponent  implements OnInit {
   transparency: boolean = false;
   myLocation: Place;
 
+  private interactionService: InteractionService = inject(InteractionService)
+  private carritoService: CarritoService = inject(CarritoService);
 
   constructor(private menuController: MenuController,
-              private modalController: ModalController
-  ) { }
+              private modalController: ModalController,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ionViewDidEnter() {
     this.menuController.enable(false, 'main');
@@ -61,7 +70,8 @@ export class MapDireccionPedidoComponent  implements OnInit {
       apiKey: apiKey, // Your Google Maps API Key
       language: 'es',
       config: {
-        disableDefaultUI: false,
+        // disableDefaultUI: true,
+        // draggable: false,
         center: {
           // The initial position to be rendered by the map
           lat: -2.861306136001268,
@@ -72,13 +82,29 @@ export class MapDireccionPedidoComponent  implements OnInit {
         zoom: 15, // The initial zoom level to be rendered by the map
       },
     });
-    // this.map.setMapType(MapType.Hybrid)
-    this.map.enableCurrentLocation(true);
+    // this.map.setMapType(MapType.Satellite);
+
+    // this.map.enableCurrentLocation(true);
+    
+    if (Capacitor.isNativePlatform) {
+       this.map.enableCurrentLocation(true);
+    }
     // this.setMarkerDemo();
     // this.setPlacesDemo();
     // this.addListeners();
     this.setMyLocation();
+    this.getQueryParams();
+    // this.getCurrentPosition();
 
+  }
+
+  getQueryParams() {
+    const queryParams = this.route.snapshot.queryParams as any;
+    console.log('queryParams -> ', queryParams);
+    if (queryParams.lat && queryParams.lng) {
+      this.setMarkerMyPosition( + queryParams.lat, + queryParams.lng)
+    }
+    
   }
 
   setMarkerDemo() {
@@ -127,6 +153,7 @@ export class MapDireccionPedidoComponent  implements OnInit {
   }
 
   setMyLocation() {
+  
     this.map.setOnMapClickListener( async (res) => {
       console.log('MapClickListener -> ', res);
       this.setMarkerMyPosition(res.latitude, res.longitude)
@@ -147,7 +174,6 @@ export class MapDireccionPedidoComponent  implements OnInit {
       if (marker.markerId == this.myLocation.id) {
         this.showDetailMarker(this.myLocation)
       }
-      
     });    
 
     this.map.setOnMyLocationClickListener( res => {
@@ -157,6 +183,7 @@ export class MapDireccionPedidoComponent  implements OnInit {
 
     this.map.setOnMyLocationButtonClickListener( res => {
       console.log('MyLocationButtonClickListener -> ', res);
+      this.getCurrentPosition();
     });    
 
 
@@ -170,12 +197,20 @@ export class MapDireccionPedidoComponent  implements OnInit {
       breakpoints: [0, 0.25]
     });
     await modal.present();
+    const {data} = await modal.onWillDismiss();
+    if (data) {
+      const place = data.place as Place
+      console.log('dismiss modal -> ', data);
+      this.carritoService.setCoordenadasPedido(place.marker.coordinate);
+      this.router.navigate(['/store/carrito'])
+    }
+    
   
   }
 
   async setMarkerMyPosition(latitude: number, longitude: number) {
-    if (this.myLocation) {
-      this.map.removeMarkers([this.myLocation.id])
+    if (this.myLocation?.id) {
+      this.map.removeMarker(this.myLocation.id)
     }
     this.myLocation = {
       name: 'Mi Ubicación',
@@ -194,14 +229,14 @@ export class MapDireccionPedidoComponent  implements OnInit {
     this.myLocation.id = id;
     // this.centerMarker(this.myLocation.marker);
     this.centerMarkerWithBounds(this.myLocation.marker);
-    // this.modal.isOpen = true;
-    // this.selectPlace = this.myLocation;
+    this.showDetailMarker(this.myLocation)
+
   }
 
   centerMarkerWithBounds(marker: Marker) {
     console.log('centerMarkerWithBounds');
     // desplazamiento
-    const des: number = 0.001;
+    const des: number = 0.0005;
     const northeast = {
       lat: marker.coordinate.lat + des,
       lng: marker.coordinate.lng + des
@@ -233,6 +268,36 @@ export class MapDireccionPedidoComponent  implements OnInit {
     
   }
 
+  async getCurrentPosition() {
+    await this.interactionService.showLoading('obteniendo tu ubicación...')
+    const check = await Geolocation.checkPermissions();
+    console.log('checkPermissions -> ', check);
+
+    if (check.location != 'granted') {
+      // solicitar permisos
+      if (check.location == 'denied') {
+        // no tenemos permisos
+        this.interactionService.dismissLoading();
+        return;
+      }
+      if (Capacitor.isNativePlatform()) {
+        const response = await Geolocation.requestPermissions({permissions: ['coarseLocation']});
+        console.log('requestPermissions response -> ', response);
+        if (response.location != 'granted') {
+          this.interactionService.dismissLoading();
+          return;
+        }
+      }      
+    }
+    console.log('obteniendo posición');
+    const location = await Geolocation.getCurrentPosition({enableHighAccuracy: true})
+    console.log('Current position:', location.coords);
+    this.interactionService.dismissLoading();
+    this.setMarkerMyPosition(location.coords.latitude, location.coords.longitude)
+    
+    
+  }
+
 
 
 
@@ -253,7 +318,7 @@ const places: Place[] = [
       iconSize: {
         width: 35,
         height: 35
-    },
+      },
       coordinate: {
         lat: -2.90486435760786,
         lng: -78.98343901973725

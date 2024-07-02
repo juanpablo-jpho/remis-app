@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 import { Marker } from '@capacitor/google-maps';
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonTitle, IonToolbar, ModalController } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonHeader, 
+  IonIcon, IonItem, IonLabel, IonTitle, IonToolbar, ModalController } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-place-detail',
@@ -13,7 +14,7 @@ import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabe
 })
 export class PlaceDetailComponent  implements OnInit {
 
-  place: Place;
+  @Input() place: Place;
 
   constructor(private modalController: ModalController) { }
 
@@ -21,6 +22,10 @@ export class PlaceDetailComponent  implements OnInit {
 
   dismiss() {
       this.modalController.dismiss();
+  }
+
+  setLocation() {
+    this.modalController.dismiss({place: this.place})
   }
 
 }

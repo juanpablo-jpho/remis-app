@@ -14,9 +14,14 @@
           <ion-label>
               {{place.name}}
               <p>{{place.description}}</p>
-              <p>Lat: {{place.marker.coordinate.lat}}</p>
-              <p>Lng: {{place.marker.coordinate.lng}}</p>
+              <!-- <p>Lat: {{place.marker.coordinate.lat}}</p>
+              <p>Lng: {{place.marker.coordinate.lng}}</p> -->
           </ion-label>
       </ion-item>
+      <div class="ion-text-center">
+          <ion-button (click)="setLocation()" shape="round">
+           Establacer esta ubicación
+          </ion-button>
+      </div>
   }
 </ion-content>

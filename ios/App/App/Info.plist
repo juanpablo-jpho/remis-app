@@ -46,6 +46,13 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 
+	<!-- input file y camara -->
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Necesitamos acceder a tu galería para que puedas tomar una foto cuando te solicitemos.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Necesitamos acceder a la camará para que puedas tomar una foto cuando te solicitemos.</string>
+
+	<!-- google maps -->
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Permitenos conocer tu ubicación para que puedas seleccionar de manera facil tu ubicación de envío</string>
 

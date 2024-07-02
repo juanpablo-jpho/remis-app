@@ -1,3 +1,5 @@
+import { LatLng } from "@capacitor/google-maps/dist/typings/definitions";
+
 export namespace ModelsTienda {
 
     export const pathCategories = 'Categories';
@@ -30,5 +32,25 @@ export namespace ModelsTienda {
         cant: number;
         product: Product;
     }
+
+    export interface InfoPedido {
+        datos: DatosUserPedido
+        fechaEntrega: string;
+        direccionEntrega: DireccionPedido
+    }
+
+    export interface DatosUserPedido {
+        id?: string
+        name: string;
+        mail: string
+        phone: string;
+    }
+
+    export interface DireccionPedido {
+        coordinate: LatLng;
+        referencia: string;
+    }
+
+
 
 }
