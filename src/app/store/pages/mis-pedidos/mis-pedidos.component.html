@@ -21,11 +21,8 @@
   <ion-grid fixed>
     <ion-row class="ion-justify-content-center">
       @for (pedido of pedidos; track $index) {
-        <ion-col size="12" sizeSm="6" sizeMd="4">
-
-          {{pedido.data().id}} - {{pedido.data().state}}
-            <!-- <app-item-product [product]="product.data()"></app-item-product> -->
-
+        <ion-col size="12" sizeSm="10" sizeMd="8">
+          <app-pedido-detail [pedido]="pedido.data()"></app-pedido-detail>
         </ion-col>
       } @empty {
         @if (!pedidos) {
@@ -37,7 +34,7 @@
         } @else {
           <div class="ion-text-center">
             <p>
-              Aun no has realidado tu primer pedido
+              Aun no has realizado tu primer pedido
             </p>
             <ion-button [routerLink]="['/']"  shape="round">
               <ion-label>Ir a la tienda</ion-label> 

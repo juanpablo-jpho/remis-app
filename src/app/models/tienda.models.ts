@@ -36,7 +36,7 @@ export namespace ModelsTienda {
 
     export interface InfoPedido {
         datos: DatosUserPedido
-        fechaEntrega: Date;
+        fechaEntrega: Date | any;
         direccionEntrega: DireccionPedido
     }
 
@@ -56,6 +56,7 @@ export namespace ModelsTienda {
         carrito: Carrito
         info: InfoPedido;
         id?: string;
+        date?: any
         uid: string;
         state: StatePedido;
     }

@@ -12,12 +12,13 @@
 
 
     <capacitor-google-map id="map"></capacitor-google-map>
-
-    <ion-fab vertical="top" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="getCurrentPosition()">
-            <ion-icon name="locate"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
+    @if (!readonly) {
+        <ion-fab vertical="top" horizontal="end" slot="fixed">
+            <ion-fab-button (click)="getCurrentPosition()">
+                <ion-icon name="locate"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+    }
 
 
 

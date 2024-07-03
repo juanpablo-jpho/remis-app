@@ -36,3 +36,6 @@ npm install @capacitor/google-maps@6.0.0-rc.0
 npm install @capacitor/geolocation@6.0.0
 
 ionic g c store/pages/mis-pedidos --spec=false
+ionic g c /store/components/pedido-detail --spec=false
+
+ionic g p /shared/pipes/datefire

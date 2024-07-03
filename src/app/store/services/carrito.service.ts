@@ -172,7 +172,7 @@ export class CarritoService {
         this.interactionService.showToast('Pedido creado con éxito');
         this.clearCarrito();
         // redirigir a la sección que deseemos
-        this.router.navigate(['/store/mis-pedidos'])
+        this.router.navigate(['/store/mis-pedidos'], {queryParams: {refresh: true}})
       } catch (error) {
         this.interactionService.dismissLoading();
         this.interactionService.presentAlert('Error', 'No se pudo realizar el pedido, intenta nuevamente');

@@ -42,6 +42,8 @@ export class MapDireccionPedidoComponent  implements OnInit {
   private interactionService: InteractionService = inject(InteractionService)
   private carritoService: CarritoService = inject(CarritoService);
 
+  readonly: boolean = false;
+
   constructor(private menuController: MenuController,
               private modalController: ModalController,
               private router: Router,
@@ -92,7 +94,7 @@ export class MapDireccionPedidoComponent  implements OnInit {
     // this.setMarkerDemo();
     // this.setPlacesDemo();
     // this.addListeners();
-    this.setMyLocation();
+    // this.setMyLocation();
     this.getQueryParams();
     // this.getCurrentPosition();
 
@@ -101,6 +103,11 @@ export class MapDireccionPedidoComponent  implements OnInit {
   getQueryParams() {
     const queryParams = this.route.snapshot.queryParams as any;
     console.log('queryParams -> ', queryParams);
+    if (queryParams.readonly) {
+      this.readonly = true
+    } else {
+      this.setMyLocation();
+    }
     if (queryParams.lat && queryParams.lng) {
       this.setMarkerMyPosition( + queryParams.lat, + queryParams.lng)
     }
@@ -218,7 +225,7 @@ export class MapDireccionPedidoComponent  implements OnInit {
       marker: {
         title: 'Mi Ubicación',
         snippet: 'Enviar pedido a está ubicación',
-        draggable: true,
+        draggable: this.readonly ? false : true,
         coordinate: {
           lat: latitude,
           lng: longitude,
@@ -229,7 +236,9 @@ export class MapDireccionPedidoComponent  implements OnInit {
     this.myLocation.id = id;
     // this.centerMarker(this.myLocation.marker);
     this.centerMarkerWithBounds(this.myLocation.marker);
-    this.showDetailMarker(this.myLocation)
+    if (!this.readonly) {
+      this.showDetailMarker(this.myLocation)
+    }
 
   }
 

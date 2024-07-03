@@ -6,7 +6,8 @@ import { AuthenticationService } from 'src/app/firebase/authentication.service';
 import { Models } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/firebase/firestore.service';
 import { QueryDocumentSnapshot } from '@angular/fire/firestore';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { PedidoDetailComponent } from '../../components/pedido-detail/pedido-detail.component';
 
 @Component({
   selector: 'app-mis-pedidos',
@@ -22,6 +23,7 @@ import { RouterModule } from '@angular/router';
     IonSpinner,
     RouterModule, IonRouterLink,
     IonIcon, 
+    PedidoDetailComponent
   ]
 })
 export class MisPedidosComponent  implements OnInit {
@@ -31,11 +33,24 @@ export class MisPedidosComponent  implements OnInit {
   user: User;
 
   pedidos: QueryDocumentSnapshot<Models.Tienda.Pedido>[];
-  numItems: number = 2;
+  numItems: number = 3;
   enableMore: boolean = true;
 
-  constructor() { 
-    this.user = this.authenticationService.getCurrentUser()
+  constructor(private route: ActivatedRoute,
+              private router: Router) { 
+    this.user = this.authenticationService.getCurrentUser();
+
+    this.route.queryParams.subscribe( (query: any) => {
+      console.log('mis pedidos - queryParams -> ', query);
+      if (query.refresh) {
+        if (this.pedidos) {
+          this.pedidos = null;
+          this.loadMorePedidos();
+          this.router.navigate(['/store/mis-pedidos'], { queryParams: {}})
+        }
+      }
+    });
+
   }
 
   ngOnInit() {
@@ -61,15 +76,18 @@ export class MisPedidosComponent  implements OnInit {
       [[]], extras);
 
       console.log('load pedidos res -> ', res.size);
-      
+
       if (res.size) {
         if (this.pedidos) {
           this.pedidos.push(...res.docs);
-        } else {
-          this.pedidos = res.docs;
-        }
-      } else {
-        this.pedidos = []
+        } 
+        // else {
+        //   this.pedidos = res.docs;
+        // }
+      } 
+
+      if (!this.pedidos) {
+        this.pedidos = res.docs;
       }
   
       if (res.size == this.numItems) {
