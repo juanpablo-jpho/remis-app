@@ -167,12 +167,12 @@ export class CarritoService {
       }
       try {
         await this.interactionService.showLoading('Realizando pedido...');
-        await this.firestoreService.createDocument(path, pedido);
+        const id = await this.firestoreService.createDocument(path, pedido);
         this.interactionService.dismissLoading();
         this.interactionService.showToast('Pedido creado con éxito');
         this.clearCarrito();
         // redirigir a la sección que deseemos
-        this.router.navigate(['/store/mis-pedidos'], {queryParams: {refresh: true}})
+        this.router.navigate(['/store/pedido', id])
       } catch (error) {
         this.interactionService.dismissLoading();
         this.interactionService.presentAlert('Error', 'No se pudo realizar el pedido, intenta nuevamente');

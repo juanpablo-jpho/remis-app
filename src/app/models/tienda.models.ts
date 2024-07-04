@@ -63,6 +63,8 @@ export namespace ModelsTienda {
 
     export type StatePedido = 'nuevo' | 'tomado' | 'asignado' | 'en camino' | 'entregado' | 'cancelado';
 
+    export const StepsPedido: StatePedido[] = ['nuevo', 'tomado', 'asignado', 'en camino', 'entregado'];
+    
 
 
 }

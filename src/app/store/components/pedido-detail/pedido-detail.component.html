@@ -8,7 +8,7 @@
         <p>{{pedido.date | datefire | date:'medium'}}</p>
       </ion-label>
       <ion-buttons slot="end">
-        <ion-button color="primary">
+        <ion-button color="primary" [routerLink]="['/store/pedido/', pedido.id]">
           seguimiento
         </ion-button>
       </ion-buttons>

@@ -1,14 +1,16 @@
 
   @if (user) {
-    <ion-item lines="full">
-      <ion-avatar slot="start">
-        <img [src]="user.photoURL | reftourl | async" />
-      </ion-avatar>
-      <ion-label>
-        {{user.displayName}}
-        <p>{{user.email}}</p>
-      </ion-label>
-    </ion-item>
+    <ion-menu-toggle autoHide="false">
+      <ion-item lines="full" [routerLink]="['/user/perfil']">
+        <ion-avatar slot="start">
+          <img [src]="user.photoURL | reftourl | async" />
+        </ion-avatar>
+        <ion-label>
+          {{user.displayName}}
+          <p>{{user.email}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-menu-toggle>
     <ion-item (click)="salir()">
       <ion-icon slot="end" name="log-out" color="danger"></ion-icon>
       <ion-label>Salir</ion-label>

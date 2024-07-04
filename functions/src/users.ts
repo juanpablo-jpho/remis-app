@@ -5,6 +5,8 @@ import { getAuth} from "firebase-admin/auth";
 import { onCall, HttpsError} from "firebase-functions/v2/https";
 import { ModelsFunctions} from "./models";
 
+import { onDocumentCreated } from "firebase-functions/v2/firestore";
+
 const firestore = getFirestore();
 const auth = getAuth();
 
@@ -57,7 +59,26 @@ export const setRol = onCall({cors: true}, async (request) => {
 });
 
 
+export const newUser = onDocumentCreated("Users/{userId}", async (event) => {
+      console.log('newUser -> ', event.params.userId);
+      const claims = {
+        roles: {
+          cliente: true
+        }
+      }
+      await auth.setCustomUserClaims(event.params.userId, claims);
+      console.log('set claim con éxito');
+      return;
+});
+
+
+
+
+
+
+
 export const Users = {
     setRol,
+    newUser,
     initAdmin
 }

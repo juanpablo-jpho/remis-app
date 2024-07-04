@@ -17,6 +17,11 @@ const routes: Routes = [
     path: 'mis-pedidos',
     loadComponent: () => import('./pages/mis-pedidos/mis-pedidos.component').then((m) => m.MisPedidosComponent),
     canActivate: [guards.isLogin()]
+  },
+  {
+    path: 'pedido/:id',
+    loadComponent: () => import('./pages/pedido-page/pedido-page.component').then((m) => m.PedidoPageComponent),
+    canActivate: [guards.isLogin()]
   }
 ];
 

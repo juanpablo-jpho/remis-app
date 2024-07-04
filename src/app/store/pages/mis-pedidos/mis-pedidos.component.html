@@ -18,6 +18,10 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content  refreshingSpinner="bubbles"></ion-refresher-content>
+  </ion-refresher>
+
   <ion-grid fixed>
     <ion-row class="ion-justify-content-center">
       @for (pedido of pedidos; track $index) {

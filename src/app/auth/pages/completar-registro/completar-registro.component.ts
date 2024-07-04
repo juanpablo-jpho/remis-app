@@ -93,9 +93,12 @@ export class CompletarRegistroComponent  implements OnInit {
         console.log('datosUser -> ', datosUser);
         await this.firestoreService.createDocument(Models.Auth.PathUsers, datosUser, user.uid);
         console.log('completado registro con éxito');
-        this.interactionService.dismissLoading();
         this.interactionService.showToast('Completado registro con éxito')
         this.router.navigate(['/user/perfil'])
+        setTimeout(() => {
+          this.interactionService.dismissLoading();
+          window.location.reload();
+        }, 2000);
       } catch (error) {
         console.log('registrarse error -> ', error);
         this.interactionService.presentAlert('Error', 'Ocurrió un error, intenta nuevamente')

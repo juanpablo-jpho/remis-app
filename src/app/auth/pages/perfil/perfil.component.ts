@@ -225,6 +225,7 @@ export class PerfilComponent  implements OnInit {
         
       } catch (error) {
         console.log('error al eliminar la cuenta -> ', error);
+        this.interactionService.dismissLoading();
         const responseAlert = await this.interactionService.presentAlert('Error', 
           `Para eliminar tu cuenta debes cerrar tu sesión e ingresar nuevamente, <strong>¿Deseas cerrar tu sesión?</strong>`,
         'Cancelar');

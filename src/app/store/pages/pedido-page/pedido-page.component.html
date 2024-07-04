@@ -1,0 +1,154 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-title>Pedido</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/store/mis-pedidos"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"  color="light">
+
+  <ion-header collapse="condense">
+    <ion-toolbar color="light">
+      <ion-title size="large">Pedido</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <br>
+  <p-stepper #stepper [activeStep]="step" [linear]="true" class="pasos" orientation="vertical">
+    <!-- <p-stepperPanel header="Nuevo">
+    </p-stepperPanel>
+    <p-stepperPanel header="Tomado">
+    </p-stepperPanel>
+    <p-stepperPanel header="En camino">
+    </p-stepperPanel>
+    <p-stepperPanel header="Entregado">
+    </p-stepperPanel> -->
+
+    @for (paso of this.steps; track $index) {
+      <p-stepperPanel  [header]="paso">
+        <!-- <ng-template pTemplate="header">
+          {{paso}}
+        </ng-template> -->
+        
+      </p-stepperPanel>
+    }
+</p-stepper>
+
+  @if (!cargando) {
+        @if (pedido) {
+
+          <ion-grid fixed>
+            <!-- state -->
+             <ion-row>
+              <ion-col size="12">
+
+              </ion-col>
+             </ion-row>
+
+            <ion-row>
+              <ion-col size="12" size="10">
+                <!-- seguimiento -->
+                 <ion-item detail color="light">
+                  <ion-label>
+                    <p> id: {{pedido.id}}</p>
+                    <p>{{pedido.date | datefire | date:'medium'}}</p>
+                  </ion-label>
+                  <ion-buttons slot="end">
+                    <ion-button color="primary" [routerLink]="['/store/pedido/', pedido.id]">
+                      seguimiento
+                    </ion-button>
+                  </ion-buttons>
+                 </ion-item>
+            
+            
+                <!-- datos -->
+                <ion-item color="light">
+                  <ion-icon name="person" slot="start" color="primary"></ion-icon>
+                  <ion-label>
+                    <ion-text color="primary">Datos:</ion-text>  
+                    <p>{{pedido.info.datos?.name}}</p>
+                    <p>{{pedido.info.datos?.phone}}</p>
+                  </ion-label>
+                </ion-item>
+      
+                <!-- fecha de entrega -->
+                <ion-item color="light">
+                  <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+                  <ion-label>
+                    <ion-text color="primary"> Fecha de entrega: </ion-text>  
+                    <p>{{ pedido.info.fechaEntrega | datefire | date:'dd-MM-yyyy'}}</p>
+                  </ion-label>
+                </ion-item>
+      
+                <!-- dirección de entrega -->
+                <ion-item detail color="light" lines="full"
+                [routerLink]="['/store/map-direccion-pedido']" 
+                [queryParams]="{lat: pedido.info.direccionEntrega.coordinate.lat, 
+                  lng: pedido.info.direccionEntrega.coordinate.lng,
+                  readonly: true}">
+                  <ion-icon name="location" slot="start" color="danger"></ion-icon>
+                  <ion-label>
+                    <ion-text color="primary">Dirección de entrega:</ion-text>  
+                    <p>{{pedido.info.direccionEntrega.referencia}}</p>
+                  </ion-label>
+                </ion-item>
+            
+                <!-- productos -->
+                <ion-accordion-group>
+                  <ion-accordion value="first">
+                    <ion-item slot="header" color="light">
+                      <ion-label>Productos</ion-label>
+                    </ion-item>
+                    <div class="ion-padding" slot="content">
+                      @for (item of pedido.carrito.items; track $index) {
+                        <ion-item lines="full" detail [routerLink]="['/store/item/' + item.product.enlacePermanente]"  >
+                          <ion-thumbnail slot="start">
+                            <img [src]="item.product.images[0]" />
+                          </ion-thumbnail>
+                          <ion-label>
+                            {{item.product.name}}
+                          </ion-label>
+                          <ion-buttons slot="end">
+                            <ion-button>
+                              {{item.product.price | currency}}
+                            </ion-button>
+                          </ion-buttons>
+                        </ion-item>
+                      }
+                    </div>
+                  </ion-accordion>
+                </ion-accordion-group>
+      
+                <!-- total -->
+                <ion-item lines="none" color="light">
+                  <ion-badge slot="end">{{pedido.carrito.total | currency}}</ion-badge>
+                  <ion-label class="ion-text-end">
+                    <strong>Total:</strong> 
+                  </ion-label>
+                </ion-item>  
+            
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+        
+
+        
+
+        } @else {
+          <div class="ion-text-center content-center">
+            <p>No existe el pedido</p>
+          </div> 
+        }
+  } @else {
+    <div class="ion-text-center content-center">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div> 
+  }
+
+  </ion-content>

@@ -66,35 +66,7 @@ export class SidemenuComponent  implements OnInit {
 
   initMenu() {
     this.menu = [];
-    // const menu: Menu[] = [
-    //   {name: 'Content', enlace: '/content', icon: 'square-outline'},
-    //   {name: 'Items', enlace: '/items', icon: 'list'},
-    //   {name: 'Buttons', enlace: '/buttons', icon: 'caret-forward-circle'},
-    //   {name: 'Menú', enlace: '/menu', icon: 'menu'},
-    //   {name: 'Sliding', enlace: '/sliding', icon: 'hand-left'},
-    //   {name: 'Select', enlace: '/select', icon: 'ellipsis-vertical-circle'},
-    //   {name: 'Card', enlace: '/card', icon: 'square'},
-    //   {name: 'Modal', enlace: '/modal', icon: 'browsers'},
-    //   {name: 'Popover', enlace: '/popover', icon: 'stop-circle'},
-    //   {name: 'Action Sheet', enlace: '/action-sheet', icon: 'filter-circle'},
-    //   {name: 'Alert', enlace: '/alert', icon: 'alert-circle'},
-    //   {name: 'Accordion', enlace: '/accordion', icon: 'swap-vertical'},
-    //   {name: 'Toast', enlace: '/toast', icon: 'remove'},
-    //   {name: 'Loading', enlace: '/loading', icon: 'refresh'},
-    //   {name: 'Progress Indicators', enlace: '/progress-indicators', icon: 'hourglass'},
-    //   {name: 'Inputs', enlace: '/input', icon: 'keypad'},
-    //   {name: 'Textarea', enlace: '/textarea', icon: 'document-text'},
-    //   {name: 'Checkbox', enlace: '/checkbox', icon: 'checkbox'},
-    //   {name: 'Radio', enlace: '/radio', icon: 'radio-button-on'},
-    //   {name: 'Toggle', enlace: '/toggle', icon: 'toggle'},
-    //   {name: 'Infinite Scroll', enlace: '/ion-infinite-scroll', icon: 'infinite'},
-    //   {name: 'Datetime', enlace: '/datetime', icon: 'calendar'},
-    //   {name: 'Tabs', enlace: '/tabs', icon: 'ellipsis-horizontal'},
-    //   {name: 'Segment', enlace: '/segment', icon: 'code-working'},
-    //   {name: 'Interacción service', enlace: '/interaction', icon: 'help-circle'},
-    //   {name: 'Grid', enlace: '/grid', icon: 'apps'},
-    // ];
-    menu.forEach( opc => {
+    menu.forEach( opc => {      
         let enable: boolean = false;
         if (opc.roles) {
           // ['admin', 'motorizado', 'cliente'];

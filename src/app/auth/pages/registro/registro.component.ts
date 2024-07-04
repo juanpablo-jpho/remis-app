@@ -74,10 +74,13 @@ export class RegistroComponent  implements OnInit {
         }
         console.log('datosUser -> ', datosUser);
         await this.firestoreService.createDocument(Models.Auth.PathUsers, datosUser, res.user.uid);
-        this.interactionService.dismissLoading();
         this.interactionService.showToast('Usuario creado con éxito')
         console.log('usuario creado con éxito');
         this.router.navigate(['/user/perfil'])
+        setTimeout(() => {
+          this.interactionService.dismissLoading();
+          window.location.reload();
+        }, 2000);
       } catch (error) {
         console.log('registrarse error -> ', error);
         this.interactionService.presentAlert('Error', 'Ocurrió un error, intenta nuevamente')

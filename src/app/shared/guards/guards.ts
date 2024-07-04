@@ -5,7 +5,7 @@ import { UserService } from "src/app/services/user.service";
 
 export namespace guards {
 
-  export const isLogin = (path: string = '/home') : CanActivateFn => {
+  export const isLogin = (path: string = '/') : CanActivateFn => {
     // console.log('isLogin guard -> ', path);
     const validador = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {      
       const userService: UserService = inject(UserService);
@@ -22,7 +22,7 @@ export namespace guards {
     return validador;
   }
 
-  export const notLogin = (path: string = '/home') : CanActivateFn => {
+  export const notLogin = (path: string = '/') : CanActivateFn => {
     // console.log('notLogin guard');
     const validador = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {      
       const userService: UserService = inject(UserService);
@@ -38,7 +38,7 @@ export namespace guards {
     return validador;
   }
 
-  export const isRol = (roles: Models.Auth.Rol[], path: string = '/home') : CanActivateFn => {
+  export const isRol = (roles: Models.Auth.Rol[], path: string = '/') : CanActivateFn => {
       console.log('isRol -> ', roles);
       const validador = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
         let valid = false;
@@ -66,7 +66,7 @@ export namespace guards {
     
   }
 
-  export const isRolClaim = (roles: Models.Auth.Rol[], path: string = '/home') : CanActivateFn => {
+  export const isRolClaim = (roles: Models.Auth.Rol[], path: string = '/') : CanActivateFn => {
     // console.log('isRolClaim -> ', roles);
     const validador = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
       let valid = false;

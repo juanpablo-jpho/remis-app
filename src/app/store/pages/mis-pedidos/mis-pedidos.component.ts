@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonTitle, IonToolbar, IonRow, IonGrid, IonCol, IonInfiniteScroll, IonInfiniteScrollContent, IonSpinner, IonRouterLink, IonIcon, IonLabel } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonTitle, IonToolbar, IonRow, IonGrid, IonCol, IonInfiniteScroll, IonInfiniteScrollContent, IonSpinner, IonRouterLink, IonIcon, IonLabel, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
 import { ButtonCarritoComponent } from '../../components/button-carrito/button-carrito.component';
 import { User } from '@angular/fire/auth';
 import { AuthenticationService } from 'src/app/firebase/authentication.service';
 import { Models } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/firebase/firestore.service';
 import { QueryDocumentSnapshot } from '@angular/fire/firestore';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { PedidoDetailComponent } from '../../components/pedido-detail/pedido-detail.component';
 
 @Component({
@@ -23,7 +23,8 @@ import { PedidoDetailComponent } from '../../components/pedido-detail/pedido-det
     IonSpinner,
     RouterModule, IonRouterLink,
     IonIcon, 
-    PedidoDetailComponent
+    PedidoDetailComponent,
+    IonRefresher, IonRefresherContent
   ]
 })
 export class MisPedidosComponent  implements OnInit {
@@ -36,20 +37,8 @@ export class MisPedidosComponent  implements OnInit {
   numItems: number = 3;
   enableMore: boolean = true;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router) { 
+  constructor() { 
     this.user = this.authenticationService.getCurrentUser();
-
-    this.route.queryParams.subscribe( (query: any) => {
-      console.log('mis pedidos - queryParams -> ', query);
-      if (query.refresh) {
-        if (this.pedidos) {
-          this.pedidos = null;
-          this.loadMorePedidos();
-          this.router.navigate(['/store/mis-pedidos'], { queryParams: {}})
-        }
-      }
-    });
 
   }
 
@@ -99,6 +88,12 @@ export class MisPedidosComponent  implements OnInit {
 
   async loadMore(event: any) {
     console.log('loadMore');
+    await this.loadMorePedidos();
+    event.target.complete();
+  }
+
+  async refresh(event: any) {
+    this.pedidos = null;
     await this.loadMorePedidos();
     event.target.complete();
   }
