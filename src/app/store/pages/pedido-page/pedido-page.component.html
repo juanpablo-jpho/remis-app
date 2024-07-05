@@ -31,6 +31,16 @@
         <!-- <ng-template pTemplate="header">
           {{paso}}
         </ng-template> -->
+        @if (paso == 'en camino') {
+          <ng-template pTemplate="content">
+              <ion-button color="light">
+                <ion-icon slot="end" src="assets/icons/moto.svg"></ion-icon>
+                <ion-label>
+                  ver motorizado  
+                </ion-label>
+              </ion-button>
+          </ng-template>
+        }
         
       </p-stepperPanel>
     }
@@ -55,11 +65,6 @@
                     <p> id: {{pedido.id}}</p>
                     <p>{{pedido.date | datefire | date:'medium'}}</p>
                   </ion-label>
-                  <ion-buttons slot="end">
-                    <ion-button color="primary" [routerLink]="['/store/pedido/', pedido.id]">
-                      seguimiento
-                    </ion-button>
-                  </ion-buttons>
                  </ion-item>
             
             

@@ -101,6 +101,11 @@ ion-button {
     display: none;
 }
 
+p-calendar input {
+    background: var(--ion-color-light);
+    min-width: 300px;
+    text-align: center;
+}
 
 
 

@@ -6,10 +6,14 @@ import { AjustesComponent } from './pages/ajustes/ajustes.component';
 import { CategoriasComponent } from './pages/categorias/categorias.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonBackButton, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCol, IonContent, IonFab, IonFabButton, IonFooter, IonGrid, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonMenuButton, IonRouterLink, IonRow, IonSelect, IonSelectOption, IonSpinner, IonText, IonTextarea, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonAccordion, IonAccordionGroup, IonBackButton, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCol, IonContent, IonFab, IonFabButton, IonFooter, IonGrid, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonMenuButton, IonRouterLink, IonRow, IonSelect, IonSelectOption, IonSpinner, IonText, IonTextarea, IonThumbnail, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { CategoriaDetailComponent } from './pages/categoria-detail/categoria-detail.component';
 import { ProductoDetailComponent } from './pages/producto-detail/producto-detail.component';
 import { SharedModule } from '../shared/shared.module';
+import { PedidosComponent } from './pages/pedidos/pedidos.component';
+import { CalendarModule } from 'primeng/calendar';
+import { DatefirePipe } from '../shared/pipes/datefire.pipe';
+import { PedidoDetailComponent } from './components/pedido-detail/pedido-detail.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,9 @@ import { SharedModule } from '../shared/shared.module';
     CategoriasComponent,
     ProductosComponent,
     CategoriaDetailComponent,
-    ProductoDetailComponent
+    ProductoDetailComponent,
+    PedidosComponent,
+    PedidoDetailComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +43,10 @@ import { SharedModule } from '../shared/shared.module';
     IonText,
     IonInfiniteScroll, IonInfiniteScrollContent,
     IonBadge,
-    SharedModule
+    SharedModule,
+    CalendarModule,
+    DatefirePipe,
+    IonAccordion, IonAccordionGroup, IonThumbnail
   ]
 })
 export class BackofficeModule { }

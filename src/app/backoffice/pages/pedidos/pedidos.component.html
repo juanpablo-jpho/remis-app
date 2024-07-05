@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-title>Pedidos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/backoffice/ajustes"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"  color="light">
+
+  <ion-header collapse="condense">
+    <ion-toolbar color="light">
+      <ion-title size="large">Pedidos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-text-end ion-margin">
+    <p-calendar 
+    (onSelect)="changeDate()"
+      [(ngModel)]="rangeDates" 
+      selectionMode="range" 
+      [readonlyInput]="true"
+      [showIcon]="true"
+      dateFormat="dd-mm-yy" />
+  </div>
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      @for (pedido of pedidos; track $index) {
+        <ion-col size="12" sizeSm="10" sizeMd="8">
+          <app-pedido-detail [pedido]="pedido"></app-pedido-detail>
+        </ion-col>
+      } @empty {
+        @if (!pedidos) {
+          <ion-col size="12">
+            <!-- <div class="ion-text-center">
+              <ion-spinner name="bubbles"></ion-spinner>
+            </div> -->
+          </ion-col>
+        } @else {
+          <ion-col size="12" class="ion-text-center">
+            <p>
+              No hay pedidos en la fecha seleccionada
+            </p>
+          </ion-col>
+        }
+      }
+
+      @if (enableMore) {
+        <div class="ion-text-center">
+          <ion-button (click)="loadMorePedidos()" shape="round">
+            loadMorePedidos
+          </ion-button>
+        </div>
+      }
+
+      <ion-infinite-scroll threshold="25%" [disabled]="!enableMore" position="bottom" 
+      (ionInfinite)="loadMorePedidos($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
