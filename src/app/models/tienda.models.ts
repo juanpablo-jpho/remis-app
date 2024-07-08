@@ -70,6 +70,8 @@ export namespace ModelsTienda {
 
     export const StepsPedido: StatePedido[] = ['nuevo', 'tomado', 'asignado', 'en camino', 'entregado'];
     
+    export const StepsPedidoMotorizado: StatePedido[] = ['asignado', 'en camino', 'entregado'];
+    
 
 
 }

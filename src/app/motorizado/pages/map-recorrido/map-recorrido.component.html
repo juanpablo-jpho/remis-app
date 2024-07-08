@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/store/carrito"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Recorrido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"
+[ngStyle]="{'--background': transparency ? 'transparent' : 'var(--ion-color-light)'}">
+
+
+  <capacitor-google-map id="map"></capacitor-google-map>
+  <!-- @if (!readonly) { -->
+      <ion-fab vertical="top" horizontal="end" slot="fixed">
+          <ion-fab-button>
+              <ion-icon name="ellipsis-vertical"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-list side="bottom">
+            <ion-fab-button (click)="centerPlace('moto')">
+              <ion-icon size="large" src="assets/icons/moto.svg"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button (click)="centerPlace('home')">
+              <ion-icon size="large" src="assets/icons/home.svg"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button (click)="centerPlace('local')">
+              <ion-icon size="large"src="assets/icons/restaurante.svg"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button (click)="centerPlace('moto-home')">
+              <ion-icon size="large" name="contract-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-fab-list>
+      </ion-fab>
+  <!-- } -->
+
+
+
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <!-- estado -->
+     @if (pedido) {
+       <ion-item>
+         <ion-select label="Estado" label-placement="fixed" [(ngModel)]="pedido.state"
+         (ionChange)="changeState()">
+           @for (estado of estados; track $index) {
+             <ion-select-option [value]="estado">{{estado}}</ion-select-option>
+           }
+         </ion-select>
+       </ion-item>
+     }
+  </ion-toolbar>
+</ion-footer>
+
+

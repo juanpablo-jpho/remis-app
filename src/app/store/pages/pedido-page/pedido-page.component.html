@@ -31,6 +31,20 @@
         <!-- <ng-template pTemplate="header">
           {{paso}}
         </ng-template> -->
+        @if (paso == 'asignado') {
+          <ng-template pTemplate="content">
+            <ion-item color="light" lines="none">
+              <ion-icon slot="start" src="assets/icons/moto.svg"></ion-icon>
+              <ion-label>
+                <ion-text color="primary">
+                  Motorizado:
+                </ion-text>
+                <p>{{pedido?.motorizado?.name}}</p>
+              </ion-label>
+            </ion-item>
+          </ng-template>
+        }
+
         @if (paso == 'en camino') {
           <ng-template pTemplate="content">
               <ion-button color="light">

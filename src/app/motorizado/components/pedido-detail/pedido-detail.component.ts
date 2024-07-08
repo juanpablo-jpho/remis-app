@@ -48,7 +48,7 @@ export class PedidoDetailComponent  implements OnInit {
   async tomarPedido() {
     await this.interactionService.showLoading('Tomando pedido...');
     try {
-      const path = `${Models.Auth.PathUsers}/${this.pedido.info.datos.id}/${Models.Tienda.pathPedidos}/${this.pedido.id}`;
+      const path = `${Models.Auth.PathUsers}/${this.pedido.uid}/${Models.Tienda.pathPedidos}/${this.pedido.id}`;
       const updateData: any = {
         state: 'asignado',
         motorizado: {

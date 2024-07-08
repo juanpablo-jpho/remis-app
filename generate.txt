@@ -49,3 +49,4 @@ ionic g c /backoffice/components/pedido-detail --spec=false
 ionic g m motorizado --routing 
 ionic g c /motorizado/page/pedidos --spec=false
 ionic g c /motorizado/components/pedido-detail --spec=false
+ionic g c /motorizado/pages/map-recorrido --spec=false

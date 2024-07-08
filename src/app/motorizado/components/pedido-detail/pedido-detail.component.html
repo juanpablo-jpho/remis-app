@@ -4,34 +4,30 @@
     <!-- estado -->
     <ion-item>
       <ion-label>Estado</ion-label>
-      <ion-badge slot="end" 
-      [color]=" pedido.state == 'tomado' ? 'primary' : 'light' "
+      <ion-badge [color]=" pedido.state == 'tomado' ? 'primary' : 'light' " 
       mode="ios">
-      {{pedido.state}}
+      {{pedido.state == 'tomado' ? 'libre' : 'ocupado' }}
     </ion-badge>
-      <!-- <ion-select label="Estado" label-placement="fixed" [(ngModel)]="pedido.state"
-      (ionChange)="changeState()">
-        @for (estado of estados; track $index) {
-          <ion-select-option [value]="estado">{{estado}}</ion-select-option>
-        }
-      </ion-select> -->
     </ion-item>
 
     <!-- tomar pedido -->
      @if (pedido.state == 'tomado') {
-       <ion-item button (click)="tomarPedido()">
-        <ion-icon slot="start" src="assets/icons/moto.svg"></ion-icon>
-        <ion-label>Hacerme cargo del pedido</ion-label>
+       <ion-item button detail (click)="tomarPedido()">
+         <ion-icon slot="start" src="assets/icons/moto.svg"></ion-icon>
+         <ion-label>Hacerme cargo del pedido</ion-label>
        </ion-item>
+
      }
 
      <!-- traking pedido -->
      @if (pedido?.motorizado?.uid == user?.uid) {
-      <ion-item button>
-       <ion-icon slot="start" src="assets/icons/moto.svg"></ion-icon>
-       <ion-label>Iniciar recorrido</ion-label>
+      <ion-item button detail 
+      [routerLink]="['/motorizado/map-recorrido']" [queryParams]="{user: pedido.uid, id: pedido.id}" >
+        <ion-icon slot="start" src="assets/icons/moto.svg"></ion-icon>
+        <ion-label>Iniciar recorrido</ion-label>
       </ion-item>
-    }
+     }
+
 
      <ion-item>
       <ion-label>

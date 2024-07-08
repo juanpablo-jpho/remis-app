@@ -10,7 +10,7 @@ import { IonAccordion, IonAccordionGroup, IonBackButton, IonBadge, IonButton,
   IonListHeader, IonMenuButton, IonRouterLink, IonRow, IonSelect, 
   IonSelectOption, IonSpinner, IonText, IonTextarea, IonThumbnail, IonTitle, 
   IonToolbar } from '@ionic/angular/standalone';
-import { PedidosComponent } from './page/pedidos/pedidos.component';
+import { PedidosComponent } from './pages/pedidos/pedidos.component';
 import { PedidoDetailComponent } from './components/pedido-detail/pedido-detail.component';
 import { DatefirePipe } from '../shared/pipes/datefire.pipe';
 
