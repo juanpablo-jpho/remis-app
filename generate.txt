@@ -58,3 +58,5 @@ ionic g c /store/pages/map-recorrido-pedido --spec=false
 
 npm install @capacitor/push-notifications@6
 ionic g s services/notifications-push
+
+npm install @capacitor/local-notifications@6

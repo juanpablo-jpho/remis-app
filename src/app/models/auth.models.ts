@@ -31,6 +31,7 @@ export namespace ModelsAuth {
             cliente?: boolean;
             motorizado?: boolean;
         }
+        token?: string;
     }
 
     export interface ProviderLoginI {

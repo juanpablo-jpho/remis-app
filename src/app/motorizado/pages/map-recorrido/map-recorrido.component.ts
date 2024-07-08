@@ -122,8 +122,8 @@ export class MapRecorridoComponent implements OnInit {
       this.loadPedido(queryParams.user, queryParams.id);
       this.addListeners();
       this.setUbicacionLocal();
-      // this.initTraking();
-      this.initTrakingDemo()
+      this.initTraking();
+      // this.initTrakingDemo()
     }
     
   }
