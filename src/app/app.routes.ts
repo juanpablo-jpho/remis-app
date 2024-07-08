@@ -17,6 +17,12 @@ export const routes: Routes = [
     loadChildren: () => import('./store/store.module').then((m) => m.StoreModule),
   },
   {
+    path: 'motorizado',
+    loadChildren: () => import('./motorizado/motorizado.module').then((m) => m.MotorizadoModule),
+    // proteger rutas
+    canActivate: [guards.isRolClaim(['motorizado'])]
+  },
+  {
     path: '',
     redirectTo: 'store',
     pathMatch: 'full',

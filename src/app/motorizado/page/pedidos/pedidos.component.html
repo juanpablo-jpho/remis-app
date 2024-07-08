@@ -2,7 +2,7 @@
   <ion-toolbar color="light">
     <ion-title>Pedidos</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/backoffice/ajustes"></ion-back-button>
+      <ion-menu-button menu="main"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -15,15 +15,6 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="ion-text-end ion-margin">
-    <p-calendar 
-    (onSelect)="changeDate()"
-      [(ngModel)]="rangeDates" 
-      selectionMode="range" 
-      [readonlyInput]="true"
-      [showIcon]="true"
-      dateFormat="dd-mm-yy" />
-  </div>
 
   <ion-grid fixed>
     <ion-row class="ion-justify-content-center">
@@ -41,22 +32,13 @@
         } @else {
           <ion-col size="12" class="ion-text-center">
             <p>
-              No hay pedidos en la fecha seleccionada
+              No hay pedidos
             </p>
           </ion-col>
         }
       }
-
     </ion-row>
   </ion-grid>
-
-      <!-- @if (enableMore) {
-        <div class="ion-text-center">
-          <ion-button (click)="loadMorePedidos()" shape="round">
-            loadMorePedidos
-          </ion-button>
-        </div>
-      } -->
 
       <ion-infinite-scroll threshold="25%" [disabled]="!enableMore" position="bottom" 
       (ionInfinite)="loadMorePedidos($event)">

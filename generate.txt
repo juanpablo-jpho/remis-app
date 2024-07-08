@@ -44,3 +44,8 @@ ionic g c /store/pages/pedido-page --spec=false
 
 ionic g c backoffice/pages/pedidos --spec=false
 ionic g c /backoffice/components/pedido-detail --spec=false
+
+
+ionic g m motorizado --routing 
+ionic g c /motorizado/page/pedidos --spec=false
+ionic g c /motorizado/components/pedido-detail --spec=false

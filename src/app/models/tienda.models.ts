@@ -59,6 +59,11 @@ export namespace ModelsTienda {
         date?: any
         uid: string;
         state: StatePedido;
+        motorizado?: {
+            uid: string;
+            name: string;
+            coordinate: LatLng;
+        }
     }
 
     export type StatePedido = 'nuevo' | 'tomado' | 'asignado' | 'en camino' | 'entregado' | 'cancelado';

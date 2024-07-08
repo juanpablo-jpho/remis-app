@@ -12,7 +12,6 @@ export class PedidosComponent  implements OnInit {
 
   private firestoreService: FirestoreService = inject(FirestoreService);
 
-
   pedidos: Models.Tienda.Pedido[];
   rangeDates: Date[];
   numItems: number = 2;
@@ -20,14 +19,15 @@ export class PedidosComponent  implements OnInit {
 
   subscribersPedidos: Subscription[] = [];
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit() {
       this.initRange();
   }
 
   ngOnDestroy(): void {
-    console.log('ngOnDestroy pedidos admin');
+    console.log('ngOnDestroy pedidos motorizado');
     this.clearSubscribers();
   }
 
@@ -62,7 +62,8 @@ export class PedidosComponent  implements OnInit {
     
 
     const path = Models.Tienda.pathPedidos;
-    const query: Models.Firestore.whereQuery[] = [['date', '>=', start, 'date', '<=', end]];
+    // const query: Models.Firestore.whereQuery[] = [['date', '>=', start, 'date', '<=', end]];
+    const query: Models.Firestore.whereQuery[] = [['state', '==', 'tomado'], ['state', '==', 'asignado']];
     const extras: Models.Firestore.extrasQuery = {
       limit: this.numItems,
       orderParam: 'date',
@@ -125,3 +126,4 @@ export class PedidosComponent  implements OnInit {
   }
 
 }
+
