@@ -1,8 +1,8 @@
 
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, inject } from '@angular/core';
-import { GoogleMap, MapType, Marker, LatLngBounds } from '@capacitor/google-maps';
+import { GoogleMap, Marker, LatLngBounds } from '@capacitor/google-maps';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, 
-  IonToolbar, MenuController, IonModal, IonItem, 
+  IonToolbar, MenuController, IonItem, 
   IonLabel, IonIcon, IonButton, 
   ModalController,
   IonFab,
@@ -17,8 +17,7 @@ import { CommonModule } from '@angular/common';
 import { Geolocation } from '@capacitor/geolocation';
 import { Capacitor } from '@capacitor/core';
 import { InteractionService } from '../../../services/interaction.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CarritoService } from 'src/app/store/services/carrito.service';
+import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from 'src/app/firebase/firestore.service';
 import { Subscription } from 'rxjs';
 import { Models } from 'src/app/models/models';
@@ -54,11 +53,8 @@ export class MapRecorridoComponent implements OnInit {
   estados = Models.Tienda.StepsPedidoMotorizado;
 
   private interactionService: InteractionService = inject(InteractionService)
-  private carritoService: CarritoService = inject(CarritoService);
   private firestoreService: FirestoreService = inject(FirestoreService);
   private authenticationService: AuthenticationService = inject(AuthenticationService);
-
-  readonly: boolean = false;
 
   suscriberPedido: Subscription;
   pedido: Models.Tienda.Pedido;
@@ -71,7 +67,6 @@ export class MapRecorridoComponent implements OnInit {
 
   constructor(private menuController: MenuController,
               private modalController: ModalController,
-              private router: Router,
               private route: ActivatedRoute) { 
                 this.user = this.authenticationService.getCurrentUser();
               }
@@ -113,33 +108,16 @@ export class MapRecorridoComponent implements OnInit {
         zoom: 15, // The initial zoom level to be rendered by the map
       },
     });
-    // this.map.setMapType(MapType.Satellite);
-
-    // this.map.enableCurrentLocation(true);
     
     if (Capacitor.isNativePlatform()) {
        this.map.enableCurrentLocation(true);
     }
-    // this.setMarkerDemo();
-    // this.setPlacesDemo();
-    // this.addListeners();
-    // this.setMyLocation();
     this.getQueryParams();
-    // this.getCurrentPosition();
-
   }
 
   getQueryParams() {
     const queryParams = this.route.snapshot.queryParams as any;
     console.log('queryParams -> ', queryParams);
-    // if (queryParams.readonly) {
-    //   this.readonly = true
-    // } else {
-    //   this.setMyLocation();
-    // }
-    // if (queryParams.lat && queryParams.lng) {
-    //   this.setMarkerMyPosition( + queryParams.lat, + queryParams.lng)
-    // }
     if (queryParams.user && queryParams.id) {
       this.loadPedido(queryParams.user, queryParams.id);
       this.addListeners();
@@ -230,10 +208,6 @@ export class MapRecorridoComponent implements OnInit {
         this.updateLocation(location.coords.latitude, location.coords.longitude)
         // this.setMarkerMyPosition(location.coords.latitude, location.coords.longitude)
     });
-    // const location = await Geolocation.getCurrentPosition({enableHighAccuracy: true})
-    // console.log('Current position:', location.coords);
-    // this.interactionService.dismissLoading();
-    // this.setMarkerMyPosition(location.coords.latitude, location.coords.longitude)
   }
 
   async updateLocation(lat: number, lng: number) {
@@ -251,91 +225,17 @@ export class MapRecorridoComponent implements OnInit {
     await this.firestoreService.updateDocument(path, updateData);
   }
 
-  setMarkerDemo() {
-    const marker: Marker = {
-      coordinate: {
-        lat: -2.9045937,
-        lng: -78.9836343,
-      }
-    }
-    this.map.addMarker(marker)
-  }
-
-  setPlacesDemo() {
-    places.forEach( async (place) => {
-      const id = await this.map.addMarker(place.marker);
-      place.id = id;
-    });
-  }
-
   addListeners() {
-    this.map.setOnMapClickListener( res => {
-        // console.log('MapClickListener -> ', res);
-        // const marker: Marker = {
-        //   title: 'hola mundo',
-        //   snippet: 'un texto más largo',
-        //   draggable: true,
-        //   coordinate: {
-        //     lat: res.latitude,
-        //     lng: res.longitude,
-        //   }
-        // }
-        // this.map.addMarker(marker);
-    })
-
-    this.map.setOnInfoWindowClickListener( info =>  {
-      console.log('InfoWindowClickListener -> ', info);  
-    });
 
     this.map.setOnMarkerClickListener( marker => {
       console.log('MarkerClickListener -> ', marker);
-      // const exist = places.find( place => place.id == marker.markerId);
-      // if (exist) {
-      //   this.showDetailMarker(exist)
-      // }
       if (marker.markerId == this.home.id) {
         this.showDetailMarker(this.home)
       }
       if (marker.markerId == this.local.id) {
         this.showDetailMarker(this.local)
       }
-    });    
-  }
-
-  setMyLocation() {
-  
-    this.map.setOnMapClickListener( async (res) => {
-      // console.log('MapClickListener -> ', res);
-      // this.setMarkerMyPosition(res.latitude, res.longitude)
-    })
-
-    this.map.setOnMarkerDragEndListener( marker => {
-      // console.log('MarkerDragEndListener -> ', marker);
-      // this.myLocation.marker.coordinate = {
-      //   lat: marker.latitude,
-      //   lng: marker.longitude,
-      // }
-      // this.showDetailMarker(this.myLocation);
-      // this.centerMarkerWithBounds(this.myLocation.marker);
-    });
-
-    this.map.setOnMarkerClickListener( marker => {
-      console.log('setMyLocation MarkerClickListener -> ', marker);
-      if (marker.markerId == this.myLocation.id) {
-        this.showDetailMarker(this.myLocation)
-      }
-    });    
-
-    this.map.setOnMyLocationClickListener( res => {
-      console.log('MyLocationClickListener -> ', res);
-      this.setMarkerMyPosition(res.latitude, res.longitude)
-    });    
-
-    this.map.setOnMyLocationButtonClickListener( res => {
-      console.log('MyLocationButtonClickListener -> ', res);
-      this.getCurrentPosition();
-    });    
-
+    }); 
 
   }
 
@@ -383,12 +283,7 @@ export class MapRecorridoComponent implements OnInit {
     }
     const id = await this.map.addMarker(this.myLocation.marker);
     this.myLocation.id = id;
-    // this.centerMarker(this.myLocation.marker);
     // this.centerMarkerWithBounds(this.myLocation.marker);
-    // if (!this.readonly) {
-    //   this.showDetailMarker(this.myLocation)
-    // }
-
   }
 
   centerMarkerWithBounds(marker: Marker) {
@@ -445,41 +340,7 @@ export class MapRecorridoComponent implements OnInit {
     this.map.setCamera({
         coordinate: marker.coordinate,
         zoom: 16,
-        // bearing: 45,
-        // angle: 45,
-        // animate: true,
-        // animationDuration: 1000
     })
-    
-  }
-
-  async getCurrentPosition() {
-    await this.interactionService.showLoading('obteniendo tu ubicación...')
-    const check = await Geolocation.checkPermissions();
-    console.log('checkPermissions -> ', check);
-
-    if (check.location != 'granted') {
-      // solicitar permisos
-      if (check.location == 'denied') {
-        // no tenemos permisos
-        this.interactionService.dismissLoading();
-        return;
-      }
-      if (Capacitor.isNativePlatform()) {
-        const response = await Geolocation.requestPermissions({permissions: ['coarseLocation']});
-        console.log('requestPermissions response -> ', response);
-        if (response.location != 'granted') {
-          this.interactionService.dismissLoading();
-          return;
-        }
-      }      
-    }
-    console.log('obteniendo posición');
-    const location = await Geolocation.getCurrentPosition({enableHighAccuracy: true})
-    console.log('Current position:', location.coords);
-    this.interactionService.dismissLoading();
-    this.setMarkerMyPosition(location.coords.latitude, location.coords.longitude)
-    
     
   }
 
@@ -534,44 +395,6 @@ export class MapRecorridoComponent implements OnInit {
 
 }
 
-
-const places: Place[] = [
-  {
-    name: 'Lugar A',
-    description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui consequuntur eos eveniet sint sit necessitatibus perspiciatis quisquam earum! Officiis rerum pariatur incidunt, asperiores quasi veritatis fugiat ex saepe neque ab?',
-    marker: {
-      title: 'Lugar A',
-      snippet: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui consequuntur eos eveniet sint sit necessitatibus perspiciatis quisquam earum! Officiis rerum pariatur incidunt, asperiores quasi veritatis fugiat ex saepe neque ab?',
-      iconUrl: 'assets/icons/moto.png',
-      iconSize: {
-        width: 35,
-        height: 35
-      },
-      coordinate: {
-        lat: -2.90486435760786,
-        lng: -78.98343901973725
-      }
-    },
-  },
-  {
-    name: 'Lugar B',
-    description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui consequuntur eos eveniet sint sit necessitatibus perspiciatis quisquam earum! Officiis rerum pariatur incidunt, asperiores quasi veritatis fugiat ex saepe neque ab?',
-    marker: {
-      title: 'Lugar B',
-      snippet: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui consequuntur eos eveniet sint sit necessitatibus perspiciatis quisquam earum! Officiis rerum pariatur incidunt, asperiores quasi veritatis fugiat ex saepe neque ab?',
-      iconUrl: 'assets/icons/restaurante.png',
-      iconSize: {
-        width: 35,
-        height: 35
-      },
-      coordinate: {
-        lat: -2.904086729776945,
-        lng: -78.98409206727841
-      }
-    }
-  }
-];
-
 const local: Place = {
     name: 'Ubicación del local',
     description: 'Calle 1 y Av 12',
@@ -589,7 +412,6 @@ const local: Place = {
       }
     }
 } 
-
 
 interface Place {
   id?: string;

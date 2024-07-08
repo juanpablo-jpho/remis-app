@@ -13,7 +13,6 @@ export class PedidosComponent  implements OnInit {
   private firestoreService: FirestoreService = inject(FirestoreService);
 
   pedidos: Models.Tienda.Pedido[];
-  rangeDates: Date[];
   numItems: number = 2;
   enableMore: boolean = true;
 
@@ -34,7 +33,6 @@ export class PedidosComponent  implements OnInit {
   loadMorePedidos(event: any = null) {
     console.log('loadMorePedidos');
     
-
     const path = Models.Tienda.pathPedidos;
     // const query: Models.Firestore.whereQuery[] = [['date', '>=', start, 'date', '<=', end]];
     const query: Models.Firestore.whereQuery[] = [['state', '==', 'tomado'], ['state', '==', 'asignado']];
@@ -63,7 +61,6 @@ export class PedidosComponent  implements OnInit {
               this.pedidos.push(pedidoLoad)
             ]
           });
-          // this.pedidos.push(...res);
         } 
       } 
 
@@ -84,12 +81,6 @@ export class PedidosComponent  implements OnInit {
     });
     this.subscribersPedidos.push(subscriberPedidos);
 
-  }
-
-  async loadMore(event: any) {
-    console.log('loadMore');
-    this.loadMorePedidos();
-    event.target.complete();
   }
 
   clearSubscribers() {

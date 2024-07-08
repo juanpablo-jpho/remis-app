@@ -51,5 +51,10 @@ ionic g c /motorizado/page/pedidos --spec=false
 ionic g c /motorizado/components/pedido-detail --spec=false
 
 ionic g c /motorizado/pages/map-recorrido --spec=false
+ionic g c /motorizado/pages/mis-pedidos --spec=false
 
 ionic g c /store/pages/map-recorrido-pedido --spec=false
+
+
+npm install @capacitor/push-notifications@6
+ionic g s services/notifications-push

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1014161933024",
+    "project_id": "pideenremis",
+    "storage_bucket": "pideenremis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014161933024:android:f972c0b54a6c10ff14c685",
+        "android_client_info": {
+          "package_name": "app.web.pideenremis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014161933024-c0jfqqg34q3vgn6hflprouhjaour35cm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGABEFIbla91O_8laqXOcFVjGXsa35qr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014161933024-c0jfqqg34q3vgn6hflprouhjaour35cm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

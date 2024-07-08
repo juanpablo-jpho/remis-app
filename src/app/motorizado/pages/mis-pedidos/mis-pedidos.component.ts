@@ -15,14 +15,11 @@ export class MisPedidosComponent  implements OnInit {
   private firestoreService: FirestoreService = inject(FirestoreService);
   private authenticationService: AuthenticationService = inject(AuthenticationService);
 
-
   pedidos: Models.Tienda.Pedido[];
   numItems: number = 2;
   enableMore: boolean = true;
 
   subscribersPedidos: Subscription[] = [];
-
-
   user: User;
 
   constructor() { 
@@ -34,17 +31,13 @@ export class MisPedidosComponent  implements OnInit {
   }
 
   ngOnDestroy(): void {
-    console.log('ngOnDestroy pedidos motorizado');
+    console.log('ngOnDestroy mis-pedidos motorizado');
     this.clearSubscribers();
   }
-
-
-
 
   loadMorePedidos(event: any = null) {
     console.log('loadMorePedidos ');
     
-
     const path = Models.Tienda.pathPedidos;
     // const query: Models.Firestore.whereQuery[] = [['date', '>=', start, 'date', '<=', end]];
     // const query: Models.Firestore.whereQuery[] = [['state', '==', 'tomado'], ['state', '==', 'asignado']];
@@ -74,7 +67,6 @@ export class MisPedidosComponent  implements OnInit {
               this.pedidos.push(pedidoLoad)
             ]
           });
-          // this.pedidos.push(...res);
         } 
       } 
 
@@ -97,11 +89,6 @@ export class MisPedidosComponent  implements OnInit {
 
   }
 
-  async loadMore(event: any) {
-    console.log('loadMore');
-    this.loadMorePedidos();
-    event.target.complete();
-  }
 
   clearSubscribers() {
     this.subscribersPedidos.forEach( subscriber => {

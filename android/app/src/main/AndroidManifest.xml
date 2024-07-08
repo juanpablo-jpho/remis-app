@@ -37,6 +37,9 @@
         <!-- google maps -->
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCBgTLv9I3BHDIYXv8t2L9SYiJHz95BMIE"/>
    
+        <!-- notification icon -->
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_stat_name" />
+
     </application>
 
     <!-- Permissions -->

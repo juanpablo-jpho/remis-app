@@ -26,25 +26,6 @@ export class PedidoDetailComponent  implements OnInit {
 
   ngOnInit() {}
 
-  async changeState() {
-    console.log('changeState -> ', this.pedido.state);
-    await this.interactionService.showLoading('Actualizando estado...');
-    try {
-      const path = `${Models.Auth.PathUsers}/${this.pedido.info.datos.id}/${Models.Tienda.pathPedidos}/${this.pedido.id}`;
-      const updateData = {
-        state: this.pedido.state
-      }
-      // crear regla de actualización
-      await this.firestoreService.updateDocument(path, updateData);
-      this.interactionService.dismissLoading();
-    } catch (error) {
-      console.error(error);
-      this.interactionService.presentAlert('Error', 'No se pudo actualizar el estado');
-      this.interactionService.dismissLoading();
-    }
-
-  }
-
   async tomarPedido() {
     await this.interactionService.showLoading('Tomando pedido...');
     try {
