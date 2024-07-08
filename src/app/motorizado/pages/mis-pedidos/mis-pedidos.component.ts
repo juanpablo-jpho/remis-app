@@ -1,29 +1,36 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { User } from '@angular/fire/auth';
 import { Subscription } from 'rxjs';
+import { AuthenticationService } from 'src/app/firebase/authentication.service';
 import { FirestoreService } from 'src/app/firebase/firestore.service';
 import { Models } from 'src/app/models/models';
 
 @Component({
-  selector: 'app-pedidos',
-  templateUrl: './pedidos.component.html',
-  styleUrls: ['./pedidos.component.scss'],
+  selector: 'app-mis-pedidos',
+  templateUrl: './mis-pedidos.component.html',
+  styleUrls: ['./mis-pedidos.component.scss'],
 })
-export class PedidosComponent  implements OnInit {
+export class MisPedidosComponent  implements OnInit {
 
   private firestoreService: FirestoreService = inject(FirestoreService);
+  private authenticationService: AuthenticationService = inject(AuthenticationService);
+
 
   pedidos: Models.Tienda.Pedido[];
-  rangeDates: Date[];
   numItems: number = 2;
   enableMore: boolean = true;
 
   subscribersPedidos: Subscription[] = [];
 
+
+  user: User;
+
   constructor() { 
+    this.user = this.authenticationService.getCurrentUser();
   }
 
   ngOnInit() {
-      this.loadMorePedidos();
+    this.loadMorePedidos();
   }
 
   ngOnDestroy(): void {
@@ -31,13 +38,17 @@ export class PedidosComponent  implements OnInit {
     this.clearSubscribers();
   }
 
+
+
+
   loadMorePedidos(event: any = null) {
-    console.log('loadMorePedidos');
+    console.log('loadMorePedidos ');
     
 
     const path = Models.Tienda.pathPedidos;
     // const query: Models.Firestore.whereQuery[] = [['date', '>=', start, 'date', '<=', end]];
-    const query: Models.Firestore.whereQuery[] = [['state', '==', 'tomado'], ['state', '==', 'asignado']];
+    // const query: Models.Firestore.whereQuery[] = [['state', '==', 'tomado'], ['state', '==', 'asignado']];
+    const query: Models.Firestore.whereQuery[] = [['motorizado.uid', '==', this.user.uid]];
     const extras: Models.Firestore.extrasQuery = {
       limit: this.numItems,
       orderParam: 'date',

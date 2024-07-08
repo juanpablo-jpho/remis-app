@@ -47,7 +47,8 @@
 
         @if (paso == 'en camino') {
           <ng-template pTemplate="content">
-              <ion-button color="light">
+              <ion-button color="light"
+              [routerLink]="['/store/map-recorrido-pedido']" [queryParams]="{user: pedido?.uid, id: pedido?.id}" >
                 <ion-icon slot="end" src="assets/icons/moto.svg"></ion-icon>
                 <ion-label>
                   ver motorizado  

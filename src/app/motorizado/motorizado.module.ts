@@ -13,12 +13,14 @@ import { IonAccordion, IonAccordionGroup, IonBackButton, IonBadge, IonButton,
 import { PedidosComponent } from './pages/pedidos/pedidos.component';
 import { PedidoDetailComponent } from './components/pedido-detail/pedido-detail.component';
 import { DatefirePipe } from '../shared/pipes/datefire.pipe';
+import { MisPedidosComponent } from './pages/mis-pedidos/mis-pedidos.component';
 
 
 @NgModule({
   declarations: [
     PedidosComponent,
-    PedidoDetailComponent
+    PedidoDetailComponent,
+    MisPedidosComponent
   ],
   imports: [
     CommonModule,

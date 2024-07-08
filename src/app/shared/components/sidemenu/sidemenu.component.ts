@@ -145,7 +145,8 @@ const menu: Menu[] = [
   {  name: 'Tienda', enlace: '/store', icon: 'storefront'},
   {  name: 'Mis pedidos', enlace: '/store/mis-pedidos', icon: 'cube', roles: ['cliente']},
   {  name: 'Pedidos', enlace: '/backoffice/pedidos', icon: 'cube', roles: ['admin']},
-  {  name: 'Pedidos', enlace: '/motorizado/pedidos', icon: 'cube', roles: ['motorizado']}
+  {  name: 'Pedidos', enlace: '/motorizado/pedidos', icon: 'cube', roles: ['motorizado']},
+  {  name: 'Mis pedidos', enlace: '/motorizado/mis-pedidos', icon: 'bicycle', roles: ['motorizado']}
 ];  
 
 
