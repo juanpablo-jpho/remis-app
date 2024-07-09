@@ -4,8 +4,6 @@ import { IonApp, IonRouterOutlet, IonSplitPane,
   IonButtons, IonMenuButton, IonIcon } from '@ionic/angular/standalone';
 import { IoniconsService } from './services/ionicons.service';
 import { SidemenuComponent } from './shared/components/sidemenu/sidemenu.component';
-import { NotificationsPushService } from './services/notifications-push.service';
-import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
@@ -21,17 +19,8 @@ export class AppComponent {
 
   private ioniconsService: IoniconsService = inject(IoniconsService)
 
-  constructor(private notificationsPushService: NotificationsPushService) {
-
+  constructor() {
       this.ioniconsService.loadAllIcons();
-      this.init()
-
-  }
-
-  init() {
-    if (Capacitor.isNativePlatform()) {
-        this.notificationsPushService.init();
-    }
   }
 
 

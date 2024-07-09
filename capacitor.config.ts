@@ -6,9 +6,9 @@ const config: CapacitorConfig = {
   webDir: 'www',
   plugins: {
     PushNotifications: {
-      presentationOptions: [],
+      presentationOptions: ["badge", "sound", "alert"],
     },
-  }
+  },
 };
 
 export default config;

@@ -12,15 +12,18 @@ import { FirestoreService } from './firestore.service';
 import { environment } from 'src/environments/environment';
 import { Browser } from '@capacitor/browser';
 import { Models } from '../models/models';
+import { NotificationsPushService } from '../services/notifications-push.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
+  private firestoreService: FirestoreService = inject(FirestoreService);
+  private notificationsPushService = inject(NotificationsPushService)
   auth: Auth = inject(Auth);
   authState = authState(this.auth);
-  firestoreService: FirestoreService = inject(FirestoreService);
+  
 
 
   constructor() { 
@@ -71,6 +74,7 @@ export class AuthenticationService {
   }
 
   async logout(reload = true) {
+    await this.notificationsPushService.deleteToken();
     await signOut(this.auth);
     if (reload) {
       window.location.reload();

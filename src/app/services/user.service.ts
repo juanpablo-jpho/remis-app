@@ -4,6 +4,7 @@ import { User } from '@angular/fire/auth';
 import { FirestoreService } from '../firebase/firestore.service';
 import { Models } from '../models/models';
 import { Router } from '@angular/router';
+import { NotificationsPushService } from './notifications-push.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class UserService {
 
   private authenticationService: AuthenticationService = inject(AuthenticationService)
   private firestoreService: FirestoreService = inject(  FirestoreService);
+  private notificationsPushService = inject(NotificationsPushService)
   private user: User;
   private userProfile: Models.Auth.UserProfile;
   private login: 'login' | 'not-login' ;
@@ -42,6 +44,7 @@ export class UserService {
               if (this.validateHasProfile) {
                 this.getUserProfile(res.uid);
               }
+              this.notificationsPushService.init(this.user)
             } else {
               this.user = null
               this.login = 'not-login';

@@ -8,10 +8,10 @@ import {
 import { InteractionService } from './interaction.service';
 import { LocalNotifications} from '@capacitor/local-notifications';
 import { LocalStorageService } from './local-storage.service';
-import { AuthenticationService } from '../firebase/authentication.service';
 import { User } from '@angular/fire/auth';
 import { FirestoreService } from '../firebase/firestore.service';
 import { Models } from '../models/models';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
@@ -20,32 +20,27 @@ export class NotificationsPushService {
 
   private interactionService: InteractionService = inject(InteractionService);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
-  private authenticationService: AuthenticationService = inject(AuthenticationService);
   private firestoreService: FirestoreService = inject(  FirestoreService);
-  user: User;
+  private user: User;
+  private enable: boolean = false;
 
   constructor() { }
 
-  init() {
-
-    this.authenticationService.authState.subscribe( user => {
-        if (user) {
-          this.user = user;
-          console.log('Initializing NotificationsPushService');
-          PushNotifications.requestPermissions().then(result => {
-            if (result.receive === 'granted') {
-              // Register with Apple / Google to receive push via APNS/FCM
-              PushNotifications.register();
-            } else {
-              // Show some error
-              this.interactionService.presentAlert('Error', 'Debes habilitar las notificaciones')
-            }
-          });
-          this.addListener();
-        }
-    });
-
-
+  init(user: User) {
+    this.user = user;
+    if (Capacitor.isNativePlatform()) {
+        console.log('Initializing NotificationsPushService');
+        PushNotifications.requestPermissions().then(result => {
+          if (result.receive === 'granted') {
+            // Register with Apple / Google to receive push via APNS/FCM
+            PushNotifications.register();
+          } else {
+            // Show some error
+            this.interactionService.presentAlert('Error', 'Debes habilitar las notificaciones')
+          }
+        });
+        this.addListener();
+    }
   }
 
   private addListener() {
@@ -55,6 +50,7 @@ export class NotificationsPushService {
         // alert('Push registration success, token: ' + token.value);
         // this.interactionService.presentAlert('Importante', `Registro exitoso, el token es: ${token.value}`);
         this.saveToken(token.value);
+        this.enable = true;
       }
     );
 
@@ -123,6 +119,20 @@ export class NotificationsPushService {
     await this.firestoreService.updateDocument(`${Models.Auth.PathUsers}/${this.user.uid}`, updateDoc);
     console.log('saved token éxito');
     await this.localStorageService.setData(path, updateDoc);  
+  }
+
+  async deleteToken() {
+    if (this.enable) {
+      // del local storage
+      const path = 'Token';
+      await this.localStorageService.deleteData(path);
+      // de firestore
+      const updateDoc: any = {
+        token: null
+      }
+      await this.firestoreService.updateDocument(`${Models.Auth.PathUsers}/${this.user.uid}`, updateDoc);
+    } 
+
   }
 
 
