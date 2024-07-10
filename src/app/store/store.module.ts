@@ -31,6 +31,7 @@ import { StepperModule } from 'primeng/stepper';
 import { DatosPedidoComponent } from './components/datos-pedido/datos-pedido.component';
 import { FechaPedidoComponent } from './components/fecha-pedido/fecha-pedido.component';
 import { DireccionPedidoComponent } from './components/direccion-pedido/direccion-pedido.component';
+import { NotificationsModule } from '../notifications/notifications.module';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { DireccionPedidoComponent } from './components/direccion-pedido/direccio
     IonChip,
     DatosPedidoComponent,
     IonDatetimeButton, IonModal, IonDatetime, IonText,
-    DireccionPedidoComponent
+    DireccionPedidoComponent,
+    NotificationsModule
   ]
 })
 export class StoreModule { }

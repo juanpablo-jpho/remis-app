@@ -1,0 +1,7 @@
+<ion-button (click)="openAllNotifications()">
+  <ion-icon slot="icon-only" name="notifications" color="primary">
+  </ion-icon>
+  @if (count()) {
+    <div class="badge">{{count()}}</div>
+  }
+</ion-button>

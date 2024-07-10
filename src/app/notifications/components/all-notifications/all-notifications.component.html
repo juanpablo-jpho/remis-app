@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Notificaciones</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+    <br>
+
+    @for (notification of notifications; track $index) {
+        <app-detail-notification [notification]="notification"></app-detail-notification>
+    } @empty {
+      <br>
+      <div class="ion-text-center">
+        <p>No tienes notificaciones</p>
+      </div> 
+    }
+
+    <ion-infinite-scroll threshold="25%" [disabled]="!notificationsService.enableMore" position="bottom" 
+    (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>
+

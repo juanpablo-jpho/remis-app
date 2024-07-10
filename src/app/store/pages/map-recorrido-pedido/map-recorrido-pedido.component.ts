@@ -4,7 +4,6 @@ import { GoogleMap, Marker, LatLngBounds } from '@capacitor/google-maps';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, 
   IonToolbar, MenuController, IonItem, 
   IonLabel, IonIcon, IonButton, 
-  ModalController,
   IonFab,
   IonFabButton,
   IonFabList,
@@ -13,15 +12,12 @@ import { IonBackButton, IonButtons, IonContent, IonHeader, IonTitle,
   IonSelectOption} from '@ionic/angular/standalone';
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
-
-import { Geolocation } from '@capacitor/geolocation';
 import { Capacitor } from '@capacitor/core';
 import { InteractionService } from '../../../services/interaction.service';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from 'src/app/firebase/firestore.service';
 import { Subscription } from 'rxjs';
 import { Models } from 'src/app/models/models';
-import { PlaceDetailComponent } from 'src/app/store/components/place-detail/place-detail.component';
 import { AuthenticationService } from 'src/app/firebase/authentication.service';
 import { User } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
@@ -50,10 +46,8 @@ export class MapRecorridoComponent implements OnInit {
   map: GoogleMap;
   transparency: boolean = false;
 
-  private interactionService: InteractionService = inject(InteractionService)
   private firestoreService: FirestoreService = inject(FirestoreService);
   private authenticationService: AuthenticationService = inject(AuthenticationService);
-
 
   suscriberPedido: Subscription;
   pedido: Models.Tienda.Pedido;
@@ -64,7 +58,6 @@ export class MapRecorridoComponent implements OnInit {
   moto: Place;
 
   constructor(private menuController: MenuController,
-              private modalController: ModalController,
               private route: ActivatedRoute) { 
                 this.user = this.authenticationService.getCurrentUser();
               }
@@ -129,10 +122,10 @@ export class MapRecorridoComponent implements OnInit {
       if (res) {
         this.pedido = res;
         console.log('pedido changes -> ', this.pedido);
-        this.setUbicacionCliente();
         if (this.pedido.motorizado?.coordinate) {
           this.setMarkerMoto(this.pedido.motorizado?.coordinate.lat, this.pedido.motorizado?.coordinate.lng)
         }
+        this.setUbicacionCliente();
       }
     });
   }
@@ -156,16 +149,11 @@ export class MapRecorridoComponent implements OnInit {
             }
           },
       }
-      // const marker: Marker = {
-      //   coordinate: {
-      //     lat: this.pedido.info.direccionEntrega.coordinate.lat,
-      //     lng: this.pedido.info.direccionEntrega.coordinate.lng
-      //   }
-      // }
       const id = await this.map.addMarker(place.marker);
       place.id = id;
       this.home = place;
     }
+    this.centerPlace('moto');
   }
 
   async setUbicacionLocal() {

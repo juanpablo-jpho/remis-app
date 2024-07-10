@@ -78,5 +78,15 @@ export namespace ModelsFunctions {
 
     export type StatePedido = 'nuevo' | 'tomado' | 'asignado' | 'en camino' | 'entregado' | 'cancelado';
 
+    export interface NotificationApp {
+        titulo: string;
+        descripcion: string;
+        enlace: string;
+        icono: string;
+        color: string;
+        state: 'nueva' | 'vista';
+        id?: string;
+        date?: any
+    }
 
 }

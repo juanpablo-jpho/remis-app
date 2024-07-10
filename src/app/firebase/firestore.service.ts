@@ -154,6 +154,22 @@ export class FirestoreService {
     return snapshot.data()
   }
 
+  async getCountOneQuery(path: string, 
+            campo: string, condition:  WhereFilterOp, value: any,  
+            group: boolean = false) {
+    if (!group) {
+      const refCollection = collection(this.firestore, path);
+      let q = query(refCollection, where(campo, condition, value))
+      const snapshot = await getCountFromServer(q );
+      return snapshot.data().count
+    } else  {
+      const refCollectionGroup = collectionGroup(this.firestore, path)
+      let q = query(refCollectionGroup, where(campo, condition, value))
+      const snapshot = await getCountFromServer(q);
+      return snapshot.data().count
+    }
+  }
+
 //----------------//
 
   private getQuery(path: string, querys: Models.Firestore.whereQuery[], extras: Models.Firestore.extrasQuery = Models.Firestore.defaultExtrasQuery) {

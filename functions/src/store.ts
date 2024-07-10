@@ -14,6 +14,7 @@ export const newPedido = onDocumentCreated("Users/{userId}/pedidos/{pedidoId}", 
       if (response.size) {
         console.log('admins -> ', response.size);
         const tokens: string[] = [];
+        const uids: string[] = [];
         for (let index = 0; index < response.docs.length; index++) {
             const element = response.docs[index];
             const data = element.data() as ModelsFunctions.UserProfile;
@@ -22,6 +23,7 @@ export const newPedido = onDocumentCreated("Users/{userId}/pedidos/{pedidoId}", 
             if (data.token) {
               tokens.push(data.token);
             }
+            uids.push(data.id);
         }
         const notificationPush: ModelsFunctions.NotificationPush = {
           tokens,
@@ -36,6 +38,15 @@ export const newPedido = onDocumentCreated("Users/{userId}/pedidos/{pedidoId}", 
         const responseNotifications = await Notifications.sendNotificationPush(notificationPush.tokens, 
                                            notificationPush.message, 
                                           notificationPush.data);
+        const notificationApp: ModelsFunctions.NotificationApp = {
+          titulo: notificationPush.message.title,
+          descripcion: notificationPush.message.content,
+          enlace: notificationPush.data.enlace,
+          icono: 'cube',
+          color: '#0054e9',
+          state: 'nueva'
+        }
+        Notifications.sendNotificationApp(uids, notificationApp);
         console.log('success notifications -> ', responseNotifications.successCount);
       }
       return;
@@ -75,6 +86,39 @@ export const cambioEstadoPedido = onDocumentUpdated("Users/{userId}/pedidos/{ped
                                           notificationPush.message, 
                                           notificationPush.data,
                                           notificationPush.tag);
+      const notificationApp: ModelsFunctions.NotificationApp = {
+        titulo: notificationPush.message.title,
+        descripcion: notificationPush.message.content,
+        enlace: notificationPush.data.enlace,
+        icono: '',
+        color: '#0054e9',
+        state: 'nueva'
+      }
+      switch (pedidoAfter.state) {
+        case 'tomado':
+          notificationApp.icono = 'time'
+         break;
+        case 'asignado':
+            notificationApp.icono = 'person-circle'
+           break;
+        case 'en camino':
+           notificationApp.icono = 'bicycle'
+          break;
+        case 'entregado':
+          notificationApp.icono = 'checkmark-circle';
+          notificationApp.color = '#4ddf34'
+          break;  
+        case 'cancelado':
+          notificationApp.icono = 'close';
+          notificationApp.color = '#f63535'
+          break;  
+        default:
+          break;
+      }
+      // if (pedidoAfter.state == 'en camino') {
+      //   notificationApp.icono = 'bicycle'
+      // }
+      Notifications.sendNotificationApp([data.id], notificationApp);
       console.log('success notifications -> ', responseNotifications.successCount);
     }
   }

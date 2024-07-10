@@ -1,0 +1,17 @@
+ion-icon {
+    padding: 5px !important;
+}
+
+.badge {
+    background: var(--ion-color-danger);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}

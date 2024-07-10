@@ -12,6 +12,8 @@ import { User } from '@angular/fire/auth';
 import { FirestoreService } from '../firebase/firestore.service';
 import { Models } from '../models/models';
 import { Capacitor } from '@capacitor/core';
+import { Router } from '@angular/router';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,7 @@ export class NotificationsPushService {
   private user: User;
   private enable: boolean = false;
 
-  constructor() { }
+  constructor(private route: Router) { }
 
   init(user: User) {
     this.user = user;
@@ -67,22 +69,24 @@ export class NotificationsPushService {
       (notification: PushNotificationSchema) => {
         // alert('Push received: ' + JSON.stringify(notification));
         // this.interactionService.presentAlert('Notificación', `${JSON.stringify(notification)}`)
-        LocalNotifications.schedule({
-          notifications: [
-            {
-              title: notification.title,
-              body: notification.body,
-              id: 1,
-              extra: {
-                data: notification.data
-              },
-              sound: "default",
-              smallIcon: 'ic_stat_name',
-              // iconColor: '#05498C',
-              // channelId: 'notification',
-            }
-          ]
-        });
+        if (Capacitor.getPlatform() == 'android') {
+          LocalNotifications.schedule({
+            notifications: [
+              {
+                title: notification.title,
+                body: notification.body,
+                id: 1,
+                extra: {
+                  data: notification.data
+                },
+                sound: "default",
+                smallIcon: 'ic_stat_name',
+                // iconColor: '#05498C',
+                // channelId: 'notification',
+              }
+            ]
+          });
+        }
       }
     );
 
@@ -90,15 +94,21 @@ export class NotificationsPushService {
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: ActionPerformed) => {
         // alert('Push action performed: ' + JSON.stringify(notification));
-        this.interactionService.presentAlert('Notificación en segundo plano', `${JSON.stringify(notification)}`)
+        // this.interactionService.presentAlert('Notificación en segundo plano', `${JSON.stringify(notification)}`)
+        if (notification?.notification?.data?.enlace) {
+          this.route.navigateByUrl(notification.notification.data.enlace)
+        }
       }
     );
 
     LocalNotifications.addListener('localNotificationActionPerformed', 
       (response) => {
         console.log('Click en notificación local -> ', response.notification);
-        this.interactionService.presentAlert('Click en notificación local', `${JSON.stringify(response.notification)}`)
-      });
+        // this.interactionService.presentAlert('Click en notificación local', `${JSON.stringify(response.notification)}`)
+        if (response?.notification?.extra?.data?.enlace) {
+          this.route.navigateByUrl(response.notification.extra.data.enlace)
+        }
+    });
     
   }
 
