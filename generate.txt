@@ -59,8 +59,6 @@ ionic g c /store/pages/map-recorrido-pedido --spec=false
 npm install @capacitor/push-notifications@6
 ionic g s services/notifications-push
 
-npm install @capacitor/local-notifications@6
-
 ionic g m notifications
 ionic g c notifications/components/all-notifications --spec=false
 ionic g c notifications/components/detail-notification --spec=false
@@ -68,3 +66,6 @@ ionic g c notifications/components/button-notifications --spec=false
 ionic g s notifications/notifications
 
 npm install @capacitor/assets --save-dev
+npm install @capacitor/splash-screen@6
+
+npm install @capacitor/status-bar@6

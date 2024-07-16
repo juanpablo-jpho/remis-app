@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthenticationService } from '../../../firebase/authentication.service';
 import { User } from '@angular/fire/auth';
 import { SharedModule } from '../../shared.module';
-// import { StatusBar, Style } from '@capacitor/status-bar';
+import { StatusBar, Style } from '@capacitor/status-bar';
 
 @Component({
   selector: 'app-sidemenu',
@@ -39,6 +39,7 @@ export class SidemenuComponent  implements OnInit {
   admin: boolean = false;
 
   roles: Models.Auth.Roles;
+
 
   constructor(private menuController: MenuController,
               private authenticationService: AuthenticationService,
@@ -123,11 +124,13 @@ export class SidemenuComponent  implements OnInit {
   // Add or remove the "ion-palette-dark" class on the html element
   toggleDarkPalette(shouldAdd: boolean) {
     document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
-    // if (shouldAdd) {
-    //   StatusBar.setStyle({style: Style.Dark});
-    // } else {
-    //   StatusBar.setStyle({style: Style.Light});
-    // }
+    if (shouldAdd) {
+      StatusBar.setBackgroundColor({color: '#08265d'})
+      StatusBar.setStyle({style: Style.Dark});
+    } else {
+      StatusBar.setStyle({style: Style.Light});
+      StatusBar.setBackgroundColor({color: '#93abd7'})
+    }
   }
 
   salir() {
