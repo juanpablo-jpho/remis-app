@@ -73,6 +73,9 @@ export class MisPedidosComponent  implements OnInit {
       if (!this.pedidos) {
         this.pedidos = res;
       }
+
+      // ordenar por fecha 
+      this.pedidos.sort((a, b) => b.date?.seconds - a.date?.seconds); 
   
       if (res.length == this.numItems) {
         this.enableMore = true;

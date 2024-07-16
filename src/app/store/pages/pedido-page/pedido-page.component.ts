@@ -18,6 +18,7 @@ import { FirestoreService } from 'src/app/firebase/firestore.service';
 import { Models } from 'src/app/models/models';
 import { DatefirePipe } from 'src/app/shared/pipes/datefire.pipe';
 import { StepperModule, Stepper } from 'primeng/stepper';
+import { NotificationsModule } from 'src/app/notifications/notifications.module';
 
 @Component({
   selector: 'app-pedido-page',
@@ -37,7 +38,8 @@ import { StepperModule, Stepper } from 'primeng/stepper';
     IonItem, IonThumbnail, IonText, IonBadge,
     DatefirePipe, 
     CommonModule,
-    StepperModule
+    StepperModule, 
+    NotificationsModule
   ]
 })
 export class PedidoPageComponent  implements OnInit, OnDestroy {

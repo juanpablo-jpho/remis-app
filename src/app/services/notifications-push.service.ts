@@ -6,7 +6,6 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { InteractionService } from './interaction.service';
-import { LocalNotifications} from '@capacitor/local-notifications';
 import { LocalStorageService } from './local-storage.service';
 import { User } from '@angular/fire/auth';
 import { FirestoreService } from '../firebase/firestore.service';
@@ -69,24 +68,6 @@ export class NotificationsPushService {
       (notification: PushNotificationSchema) => {
         // alert('Push received: ' + JSON.stringify(notification));
         // this.interactionService.presentAlert('Notificación', `${JSON.stringify(notification)}`)
-        if (Capacitor.getPlatform() == 'android') {
-          LocalNotifications.schedule({
-            notifications: [
-              {
-                title: notification.title,
-                body: notification.body,
-                id: 1,
-                extra: {
-                  data: notification.data
-                },
-                sound: "default",
-                smallIcon: 'ic_stat_name',
-                // iconColor: '#05498C',
-                // channelId: 'notification',
-              }
-            ]
-          });
-        }
       }
     );
 
@@ -100,15 +81,6 @@ export class NotificationsPushService {
         }
       }
     );
-
-    LocalNotifications.addListener('localNotificationActionPerformed', 
-      (response) => {
-        console.log('Click en notificación local -> ', response.notification);
-        // this.interactionService.presentAlert('Click en notificación local', `${JSON.stringify(response.notification)}`)
-        if (response?.notification?.extra?.data?.enlace) {
-          this.route.navigateByUrl(response.notification.extra.data.enlace)
-        }
-    });
     
   }
 

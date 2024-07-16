@@ -2,10 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>Remis</string>
+	<string>Remis</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -45,16 +49,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-
-	<!-- input file y camara -->
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Necesitamos acceder a tu galería para que puedas tomar una foto cuando te solicitemos.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Necesitamos acceder a la camará para que puedas tomar una foto cuando te solicitemos.</string>
-
-	<!-- google maps -->
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Permitenos conocer tu ubicación para que puedas seleccionar de manera facil tu ubicación de envío</string>
-
 </dict>
 </plist>

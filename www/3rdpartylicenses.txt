@@ -151,7 +151,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 @capacitor/google-maps
 MIT
 
-@capacitor/local-notifications
+@capacitor/push-notifications
 MIT
 Copyright 2020-present Ionic
 https://ionic.io
@@ -178,7 +178,7 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-@capacitor/push-notifications
+@capacitor/splash-screen
 MIT
 Copyright 2020-present Ionic
 https://ionic.io

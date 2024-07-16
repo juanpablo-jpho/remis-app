@@ -129,11 +129,12 @@ export class NotificationsService {
   }
 
   async delete(notification: Models.Notifications.Notification) {
-    console.log('delete');
+    console.log('delete -> ', notification);
     const response = await this.interactionService.presentAlert('Importante', 
             '¿Seguro que desea eliminar esta notificación?', 'Cancelar', 'Ok');
     if (response) {
       const path = `${Models.Auth.PathUsers}/${this.user.uid}/${Models.Notifications.pathNotificaciones}/${notification.id}`;
+      // crear regla de eliminacion
       this.firestoreService.deleteDocument(path);
       const index = this.notifications.findIndex( notifitionExist => notifitionExist.id == notification.id);
       if (index >= 0 ) {

@@ -67,3 +67,4 @@ ionic g c notifications/components/detail-notification --spec=false
 ionic g c notifications/components/button-notifications --spec=false
 ionic g s notifications/notifications
 
+npm install @capacitor/assets --save-dev
