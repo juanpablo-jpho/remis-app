@@ -33,6 +33,7 @@ export class AppComponent {
       SplashScreen.hide();
       // StatusBar.setOverlaysWebView({ overlay: true });
       StatusBar.show();
+      
       // StatusBar.setStyle({ style: Style.Light });
       // StatusBar.setBackgroundColor({color: '#2658b0'})
     }
