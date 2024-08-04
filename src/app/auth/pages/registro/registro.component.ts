@@ -7,6 +7,7 @@ import { FirestoreService } from '../../../firebase/firestore.service';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/firebase/storage.service';
 import { UserService } from 'src/app/services/user.service';
+import { FunctionsService } from 'src/app/firebase/functions.service';
 
 
 @Component({
@@ -20,13 +21,14 @@ export class RegistroComponent  implements OnInit {
   firestoreService: FirestoreService = inject(  FirestoreService);
   storageService: StorageService = inject(StorageService);
   userService: UserService = inject(UserService);
+  functionsService: FunctionsService = inject(FunctionsService);
  
   datosForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]], 
     password: ['', Validators.required],
     name: ['', Validators.required],
     photo: [null, Validators.required],
-    age: [null, Validators.required],
+    age: [25, Validators.required],
   });
 
   cargando: boolean = false;
@@ -73,14 +75,17 @@ export class RegistroComponent  implements OnInit {
           roles: { cliente: true}
         }
         console.log('datosUser -> ', datosUser);
+
+        // establecer rol por defecto en cliente en el módulo de autenticación
+        const responseRol = await this.functionsService.call<any, any>('setRol', {})
+        console.log('response -> ', responseRol);
+
         await this.firestoreService.createDocument(Models.Auth.PathUsers, datosUser, res.user.uid);
         this.interactionService.showToast('Usuario creado con éxito')
         console.log('usuario creado con éxito');
-        this.router.navigate(['/user/perfil'])
-        setTimeout(() => {
-          this.interactionService.dismissLoading();
-          window.location.reload();
-        }, 2000);
+        await this.router.navigate(['/user/perfil'])
+        this.interactionService.dismissLoading();
+        window.location.reload();
       } catch (error) {
         console.log('registrarse error -> ', error);
         this.interactionService.presentAlert('Error', 'Ocurrió un error, intenta nuevamente')

@@ -18,7 +18,7 @@ export class HomeStoreComponent  implements OnInit {
   categorySelected: string;
 
   products: QueryDocumentSnapshot<Models.Tienda.Product>[];
-  numItems: number = 2;
+  numItems: number = 8;
   enableMore: boolean = true;
 
 

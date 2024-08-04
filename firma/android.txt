@@ -1,0 +1,6 @@
+key store path: /Users/macbook/Documents/remis/firma/android-path
+pass store path: remispass
+
+key
+alias: key0
+pass: remispass

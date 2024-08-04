@@ -53,6 +53,7 @@ export class MapDireccionPedidoComponent  implements OnInit {
     this.menuController.enable(false, 'main');
     this.transparency = true;
     this.initMap();
+
   }
 
   ionViewDidLeave() {
@@ -89,8 +90,9 @@ export class MapDireccionPedidoComponent  implements OnInit {
     // this.map.enableCurrentLocation(true);
     
     if (Capacitor.isNativePlatform()) {
-       this.map.enableCurrentLocation(true);
+      //  this.map.enableCurrentLocation(true);
     }
+
     // this.setMarkerDemo();
     // this.setPlacesDemo();
     // this.addListeners();

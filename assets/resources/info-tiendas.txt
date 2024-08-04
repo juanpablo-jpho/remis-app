@@ -1,0 +1,31 @@
+politicas de privacidad
+https://drive.google.com/drive/folders/1BkB69SqxFWDGAZ-gP1AFSdyTeNEspSVM
+
+Ingresar un usuario de pruebas
+usuario demo:
+clientedemo@remis.com
+123456
+
+teligol.code@gmail.com
++593987654321
+
+App name:
+Remis
+
+Short description:
+Pide en Remis de manera sencilla y rápida
+
+Full description:
+Para mejorar tu experiencia puedes hacer tu pedido y hacer un seguimiento en tiempo real del motorizado que lleva tu pedido. Todos nuestros platos y combos increíbles.
+
+
+
+
+ionic build --prod
+npx cap sync ios
+npx cap open ios
+
+ionic build --prod
+npx cap sync android
+npx cap open android
+

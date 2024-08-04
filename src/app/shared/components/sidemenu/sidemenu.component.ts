@@ -40,7 +40,6 @@ export class SidemenuComponent  implements OnInit {
   paletteToggle = false;
   user: User;
 
-  admin: boolean = false;
 
   roles: Models.Auth.Roles;
 
@@ -62,9 +61,6 @@ export class SidemenuComponent  implements OnInit {
           if (this.user) {
             const roles = await this.userService.getRol();
             console.log('roles -> ', roles);
-            if (roles?.admin) {
-              this.admin = true;
-            }
             this.roles = roles;
             
           } 
@@ -79,6 +75,7 @@ export class SidemenuComponent  implements OnInit {
   ngOnInit() {}
 
   initMenu() {
+    console.log('initMenu -> ', this.roles);
     this.menu = [];
     menu.forEach( opc => {      
         let enable: boolean = false;
@@ -101,6 +98,8 @@ export class SidemenuComponent  implements OnInit {
           this.menu.push(opc);
         }
     });
+    console.log(' this.menu -> ',  this.menu);
+    
   } 
 
   async closeMenu() {

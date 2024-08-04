@@ -1,4 +1,4 @@
-package app.web.pideenremis;
+package app.web.pideenremis.prod;
 
 import com.getcapacitor.BridgeActivity;
 

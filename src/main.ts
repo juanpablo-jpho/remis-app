@@ -26,7 +26,7 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideIonicAngular({innerHTMLTemplatesEnabled: true}),
+    provideIonicAngular({innerHTMLTemplatesEnabled: true, backButtonText: ''}),
     provideRouter(routes, withPreloading(PreloadAllModules)),
 
     // firebase

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { User } from '@angular/fire/auth';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { StorageService } from 'src/app/firebase/storage.service';
+import { FunctionsService } from 'src/app/firebase/functions.service';
 
 @Component({
   selector: 'app-completar-registro',
@@ -20,7 +21,8 @@ export class CompletarRegistroComponent  implements OnInit {
   authenticationService: AuthenticationService = inject(AuthenticationService);
   firestoreService:   FirestoreService = inject(  FirestoreService);
   storageService: StorageService = inject(StorageService);
- 
+  functionsService: FunctionsService = inject(FunctionsService);
+
   cargando: boolean = false;
 
   user: User;
@@ -30,7 +32,7 @@ export class CompletarRegistroComponent  implements OnInit {
     email: ['', [Validators.required, Validators.email]], 
     name: ['', Validators.required],
     photo: [null, Validators.required],
-    age: [null, Validators.required],
+    age: [25, Validators.required],
   });
   
 
@@ -42,14 +44,14 @@ export class CompletarRegistroComponent  implements OnInit {
                this.user =  this.authenticationService.auth.currentUser;
                const photo: any = this.user.photoURL
                this.datosFormCompleteRegistro.setValue({
-                email: this.user.email,
-                name: this.user.displayName,
-                photo: photo,
-                age: null
+                  email: this.user.email,
+                  name: this.user.displayName,
+                  photo: photo,
+                  age: 25
               }
-)
 
-
+              
+            )
   }
 
   ngOnInit() {}
@@ -57,6 +59,7 @@ export class CompletarRegistroComponent  implements OnInit {
   async completarRegistro() {
     this.cargando = true;
     console.log('datosFormCompleteRegistro -> ', this.datosFormCompleteRegistro);
+
     if (this.datosFormCompleteRegistro.valid) {
       await this.interactionService.showLoading('Procensando...')
       const data = this.datosFormCompleteRegistro.value;
@@ -91,14 +94,17 @@ export class CompletarRegistroComponent  implements OnInit {
           roles: { cliente: true }
         }
         console.log('datosUser -> ', datosUser);
+
+        // establecer rol por defecto en cliente en el módulo de autenticación
+        const responseRol = await this.functionsService.call<any, any>('setRol', {})
+        console.log('response -> ', responseRol);
+
         await this.firestoreService.createDocument(Models.Auth.PathUsers, datosUser, user.uid);
         console.log('completado registro con éxito');
         this.interactionService.showToast('Completado registro con éxito')
-        this.router.navigate(['/user/perfil'])
-        setTimeout(() => {
-          this.interactionService.dismissLoading();
-          window.location.reload();
-        }, 2000);
+        await this.router.navigate(['/user/perfil'])
+        this.interactionService.dismissLoading();
+        window.location.reload();
       } catch (error) {
         console.log('registrarse error -> ', error);
         this.interactionService.presentAlert('Error', 'Ocurrió un error, intenta nuevamente')

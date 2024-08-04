@@ -9,5 +9,5 @@ export const environment = {
     appId: "1:1014161933024:web:61dbb0a8782d8bf714c685",
     measurementId: "G-E4TWPZ3Y83"
   },
-  version: '1.0.0'
+  version: '1.0.1'
 };

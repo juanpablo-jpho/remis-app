@@ -24,16 +24,6 @@
     </ion-menu-toggle>
   }
 
-
-  @if (admin) {
-    <ion-menu-toggle autoHide="false">
-      <ion-item [routerLink]="['/user/admin']">
-        <ion-icon slot="end" name="people" color="primary"></ion-icon>
-        <ion-label>Admin</ion-label>
-      </ion-item>
-    </ion-menu-toggle>
-  }
-
   
   @for (opc of menu; track $index) {
     <ion-menu-toggle autoHide="false">

@@ -37,6 +37,7 @@ export class AppComponent {
       // StatusBar.setStyle({ style: Style.Light });
       // StatusBar.setBackgroundColor({color: '#2658b0'})
     }
+    
   }
 
 
