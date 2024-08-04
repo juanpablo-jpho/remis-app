@@ -2,16 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIStatusBarHidden</key>
-	<true/>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>es</string>
 	<key>CFBundleDisplayName</key>
 	<string>Remis</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -24,8 +22,16 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Necesitamos acceder a la camará para que puedas configurar tu foto de perfil.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Permitenos conocer tu ubicación para que puedas seleccionar de manera facil tu ubicación de envío</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Necesitamos acceder a tu galería para que puedas elegir una foto de perfil.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -34,6 +40,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -49,11 +57,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Necesitamos acceder a tu galería para que puedas tomar una foto cuando te solicitemos.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Necesitamos acceder a la camará para que puedas tomar una foto cuando te solicitemos.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Permitenos conocer tu ubicación para que puedas seleccionar de manera facil tu ubicación de envío</string>
 </dict>
 </plist>

@@ -81,7 +81,7 @@ export class MapRecorridoComponent implements OnInit {
   async initMap() {
 
     this.map = await GoogleMap.create({
-      id: 'my-map', // Unique identifier for this map instance
+      id: 'mymap', // Unique identifier for this map instance
       element: document.getElementById('map'), // reference to the capacitor-google-map element
       apiKey: apiKey, // Your Google Maps API Key
       language: 'es',

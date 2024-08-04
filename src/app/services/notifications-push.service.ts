@@ -104,16 +104,22 @@ export class NotificationsPushService {
   }
 
   async deleteToken() {
-    if (this.enable) {
-      // del local storage
-      const path = 'Token';
-      await this.localStorageService.deleteData(path);
-      // de firestore
-      const updateDoc: any = {
-        token: null
-      }
-      await this.firestoreService.updateDocument(`${Models.Auth.PathUsers}/${this.user.uid}`, updateDoc);
-    } 
+    console.log('deleteToken');
+    try {
+      if (this.enable) {
+        // del local storage
+        const path = 'Token';
+        await this.localStorageService.deleteData(path);
+        // de firestore
+        const updateDoc: any = {
+          token: null
+        }
+        await this.firestoreService.updateDocument(`${Models.Auth.PathUsers}/${this.user.uid}`, updateDoc);
+      } 
+    } catch (error) {
+      console.log('no se pudo borrar el token de notificaciones del usuario');
+      // no se pudo borrar el token de notificaciones del usuario
+    }
 
   }
 

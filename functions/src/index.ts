@@ -13,7 +13,6 @@ initializeApp();
 import { Users } from "./users";
 
 export const setRol = Users.setRol;
-export const newUser = Users.newUser
 
 // Users.initAdmin();
 
