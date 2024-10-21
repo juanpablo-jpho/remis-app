@@ -12,8 +12,7 @@ service cloud.firestore {
 		
     match /Users/{userId} {
 
-
-                     
+               
       allow create: if ( request.auth.uid == userId 
       								&& !request.resource.data.roles.keys().hasAny(['admin'])
                        ) || request.auth.token.roles.admin == true;
@@ -27,8 +26,56 @@ service cloud.firestore {
       allow get: if request.auth.uid == userId || request.auth.token.roles.admin == true;  
       
       allow list: if request.auth.token.roles.admin == true;
+      
+      match /pedidos/{pedidoId} {
+    			allow create: if request.auth.uid == userId && request.resource.data.state == 'nuevo';
+          allow read: if request.auth.uid == userId;
+          allow update: if request.auth.token.roles.admin == true ||
+          						(request.auth.token.roles.motorizado == true && resource.data.state == 'tomado')
+                      || (request.auth.token.roles.motorizado == true 
+                      			&& resource.data.motorizado.uid == request.auth.uid); 
+      }
+      
+      match /notificaciones/{notificacionId} {
+      	allow read: if request.auth.uid == userId;
+        allow update: if request.auth.uid == userId;
+        allow delete: if request.auth.uid == userId;
+      }
+
+      
  
     }
+    
+  	match /{path=**}/pedidos/{pedidoId} {
+      allow read: if request.auth.token.roles.admin == true || 
+      		request.auth.token.roles.motorizado == true 
+    }
+
+    
+    
+    
+
+    
+    match /Categories/{categoryId} {
+    		allow read;
+        allow write: if request.auth.token.roles.admin == true;
+    }
+    
+    match /Products/{productId} {
+    		allow read;
+        allow write: if request.auth.token.roles.admin == true;
+    }
+    
+    match /Version/{id} {
+    	allow read;
+    }
+    
+
+    
+    
+
+    
+
     
   }
 }
